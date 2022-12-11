@@ -9,13 +9,14 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     var mapData = this.add.tilemap('testMapJson');
-    mapData.addTilesetImage('phaser-logo', 'tiles'); // phaser-logo specified in map data
-    mapData.createLayer('1', 'phaser-logo')
+    // tiles are 48x48
+    mapData.addTilesetImage('1', 'tiles'); // phaser-logo specified in map data
+    mapData.createLayer('1', '1')
   }
 
   preload() {
     this.load.tilemapTiledJSON('testMapJson', 'assets/maps/1.json')
-    this.load.image('tiles', 'assets/img/phaser-logo.png');
+    this.load.image('tiles', 'assets/img/tiles.png');
   }
 
   update() {
