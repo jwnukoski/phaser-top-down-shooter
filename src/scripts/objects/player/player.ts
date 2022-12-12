@@ -1,26 +1,24 @@
 import 'phaser'
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y) {
-      super(scene, x, y, 'phaser-logo')
-      scene.add.existing(this)
-      scene.physics.add.existing(this)
-  
+export default class Player extends Phaser.GameObjects.Container {
+    #sceneRef: Phaser.Scene;
+
+    constructor(scene: Phaser.Scene, x, y) {
+      super(scene, x, y);
+      this.#sceneRef = scene;
+      scene.add.existing(this);
+      
+      var sprite0 = this.#sceneRef.add.sprite(0, 0, 'lemming');
+      this.add(sprite0);
+      this.#sceneRef.load.image('lemming', 'assets/img/player/idle/unarmed.png');
     }
 
     public preload() {
-        
-        // this.load.spritesheet('player_handgun', 'assets/sprites/player_handgun.png',
-            // { frameWidth: 66, frameHeight: 60 });
-        
+      console.log('player preload')
     }
 
-    public create () {
-
-    }
-
-    public update() {
-    
+    public override update() {
+        console.log('update')
     }
 }
   

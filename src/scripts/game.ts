@@ -8,8 +8,8 @@ const config = {
     parent: 'phaser-game',
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 1280,
-    height: 720
+    width: 200,
+    height: 200
   },
   pixelArt: true,
   scene: [MainScene],
