@@ -19,6 +19,9 @@ export default class MainScene extends Phaser.Scene {
   preload() {
     this.load.tilemapTiledJSON('testMapJson', 'assets/maps/1.json')
     this.load.image('tiles', 'assets/img/tiles.png');
+
+    // this is super annoying you have to load this here, create a loader handler to just load everything
+    this.load.image('idle-unarmed', 'assets/img/player/idle/unarmed.png')
   }
 
   update() {

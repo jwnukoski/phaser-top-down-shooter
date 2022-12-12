@@ -4,21 +4,20 @@ export default class Player extends Phaser.GameObjects.Container {
     #sceneRef: Phaser.Scene;
 
     constructor(scene: Phaser.Scene, x, y) {
-      super(scene, x, y);
-      this.#sceneRef = scene;
-      scene.add.existing(this);
+      super(scene, x, y)
+      this.#sceneRef = scene
       
-      var sprite0 = this.#sceneRef.add.sprite(0, 0, 'lemming');
-      this.add(sprite0);
-      this.#sceneRef.load.image('lemming', 'assets/img/player/idle/unarmed.png');
-    }
+      var sprite0 = scene.add.sprite(0, 0, 'idle-unarmed')
+      this.add(sprite0)
 
-    public preload() {
-      console.log('player preload')
+      scene.add.existing(this)
     }
 
     public override update() {
-        console.log('update')
+      console.log('update')
+      
     }
+
+    
 }
   
