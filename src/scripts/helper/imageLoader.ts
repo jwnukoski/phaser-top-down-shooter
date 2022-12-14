@@ -5,22 +5,26 @@ import * as path from 'path'
 /* Class to auto preload and key assets */
 export default class ImageLoader extends Phaser.GameObjects.Container {
     #sceneRef: Phaser.Scene;
-    #files = [];
+    #files: string[] = [];
 
-    constructor(scene: Phaser.Scene, x, y) {
-      super(scene, x, y)
-      this.#sceneRef = scene
-      
-      var sprite0 = scene.add.sprite(0, 0, 'idle-unarmed')
-      this.add(sprite0)
+    constructor(scene: Phaser.Scene) {
+        // X and Y are only needed for super and are irrelevant
+        super(scene, 0, 0)
+        this.#sceneRef = scene
+        
+        var sprite0 = scene.add.sprite(0, 0, 'idle-unarmed')
+        this.add(sprite0)
 
-      scene.add.existing(this)
+        this.#files = this.getImagePaths();
+
+        scene.add.existing(this)
     }
 
-    private getImagePaths() {
-        const paths = [];
-
-        return paths;
+    private getImagePaths():string[] {
+        const files = [];
+        this.getFilesRecursively('/assets/img', files);
+        console.log(files)
+        return files;
     }
 
     private getImageNames(paths) {
@@ -54,12 +58,12 @@ export default class ImageLoader extends Phaser.GameObjects.Container {
         //   })
     }
 
-    private getFilesRecursively(directory) {
+    private getFilesRecursively(directory, files) {
         const filesInDirectory = fs.readdirSync(directory);
         for (const file of filesInDirectory) {
             const absolute = path.join(directory, file);
             if (fs.statSync(absolute).isDirectory()) {
-                getFilesRecursively(absolute);
+                this.getFilesRecursively(absolute, files);
             } else {
                 files.push(absolute);
             }
