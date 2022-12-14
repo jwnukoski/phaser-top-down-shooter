@@ -1,8 +1,11 @@
 import 'phaser'
+import * as fs from 'fs'
+import * as path from 'path'
 
 /* Class to auto preload and key assets */
 export default class ImageLoader extends Phaser.GameObjects.Container {
     #sceneRef: Phaser.Scene;
+    #files = [];
 
     constructor(scene: Phaser.Scene, x, y) {
       super(scene, x, y)
@@ -49,6 +52,18 @@ export default class ImageLoader extends Phaser.GameObjects.Container {
         //     frameWidth: 48,
         //     frameHeight: 48
         //   })
+    }
+
+    private getFilesRecursively(directory) {
+        const filesInDirectory = fs.readdirSync(directory);
+        for (const file of filesInDirectory) {
+            const absolute = path.join(directory, file);
+            if (fs.statSync(absolute).isDirectory()) {
+                getFilesRecursively(absolute);
+            } else {
+                files.push(absolute);
+            }
+        }
     }
 }
   
