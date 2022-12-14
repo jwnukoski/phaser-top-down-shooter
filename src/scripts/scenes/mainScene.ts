@@ -1,6 +1,7 @@
 import PhaserLogo from '../objects/phaserLogo'
 import FpsText from '../objects/fpsText'
-import Player from '../objects/player/player';
+import Player from '../objects/player/player'
+import ImageLoader from '../helper/imageLoader'
 
 export default class MainScene extends Phaser.Scene {
 
@@ -13,6 +14,7 @@ export default class MainScene extends Phaser.Scene {
     // tiles are 48x48
     mapData.addTilesetImage('1', 'tiles'); // phaser-logo specified in map data
     mapData.createLayer('1', '1')
+    new ImageLoader(this)
     new Player(this, 24, 24)
   }
 
