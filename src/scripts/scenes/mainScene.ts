@@ -1,10 +1,10 @@
-import PhaserLogo from '../objects/phaserLogo'
-import FpsText from '../objects/fpsText'
 import Player from '../objects/player/player'
-import ImageLoader from '../helper/imageLoader'
+import ImageLoader from '../helper/img/imageLoader'
+import SoundLoader from '../helper/snd/soundLoader'
 
 export default class MainScene extends Phaser.Scene {
   #imageLoader:ImageLoader = new ImageLoader(this)
+  #soundLoader:SoundLoader = new SoundLoader(this)
 
   constructor() {
     super({ key: 'MainScene' })
@@ -22,6 +22,7 @@ export default class MainScene extends Phaser.Scene {
   preload() {
     this.load.tilemapTiledJSON('testMapJson', 'assets/maps/1.json')
     this.#imageLoader.preload()
+    this.#soundLoader.preload()
   }
 
   update() {
