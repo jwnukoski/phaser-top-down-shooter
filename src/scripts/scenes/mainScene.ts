@@ -1,10 +1,13 @@
 import Player from '../objects/player/player'
 import ImageLoader from '../helpers/img/imageLoader'
 import SoundLoader from '../helpers/snd/soundLoader'
+import Music from '../objects/music'
 
 export default class MainScene extends Phaser.Scene {
   #imageLoader:ImageLoader = new ImageLoader(this)
   #soundLoader:SoundLoader = new SoundLoader(this)
+  #music:Music = new Music(this)
+  #player: Player
 
   constructor() {
     super({ key: 'MainScene' })
@@ -13,11 +16,12 @@ export default class MainScene extends Phaser.Scene {
   create() {
     var mapData = this.add.tilemap('testMapJson');
     // tiles are 48x48
-    mapData.addTilesetImage('1', 'assets-img-ts-tiles'); // phaser-logo specified in map data
+    mapData.addTilesetImage('1', 'img-ts-tiles'); // phaser-logo specified in map data
     mapData.createLayer('1', '1')
     
-    new Player(this, 24, 24)
-    this.sound.add('assets-snd-music').play();
+    this.#player = new Player(this, 24, 24)
+    this.#music.startNewTrack('snd-music-dnb')
+    this.#music.startNewTrack('snd-music-atmospheric')
   }
 
   preload() {
@@ -27,7 +31,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-
+    this.#music.update()
   }
 
 }

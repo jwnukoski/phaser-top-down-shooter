@@ -12,7 +12,8 @@ export default class SoundLoader {
     preload() {   
         for (const soundPath of soundList) {
             const path = `assets/snd/${soundPath}.mp3`
-            const key = path.replaceAll('/', '-')
+            const key = path.replaceAll('assets/', '')
+                            .replaceAll('/', '-')
                             .replaceAll('_', '-')
                             .replaceAll('.mp3', '')
                             .toLowerCase()

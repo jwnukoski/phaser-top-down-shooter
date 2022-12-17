@@ -7,7 +7,7 @@ export default class Player extends Phaser.GameObjects.Container {
       super(scene, x, y)
       this.#sceneRef = scene
       
-      var sprite0 = scene.add.sprite(0, 0, 'assets-img-player-idle-unarmed')
+      var sprite0 = scene.add.sprite(0, 0, 'img-player-idle-unarmed')
       this.add(sprite0)
 
       scene.add.existing(this)

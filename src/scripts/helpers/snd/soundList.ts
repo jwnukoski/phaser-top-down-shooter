@@ -2,5 +2,6 @@
 /* This template makes it difficult for webpack to use native 'fs' */
 export default [
     /* Global */
-    'music',
+    'music/dnb',
+    'music/atmospheric',
 ]
