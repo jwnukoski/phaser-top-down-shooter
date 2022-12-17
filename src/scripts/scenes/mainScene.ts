@@ -4,6 +4,7 @@ import Player from '../objects/player/player'
 import ImageLoader from '../helper/imageLoader'
 
 export default class MainScene extends Phaser.Scene {
+  #imageLoader:ImageLoader = new ImageLoader(this)
 
   constructor() {
     super({ key: 'MainScene' })
@@ -12,18 +13,15 @@ export default class MainScene extends Phaser.Scene {
   create() {
     var mapData = this.add.tilemap('testMapJson');
     // tiles are 48x48
-    mapData.addTilesetImage('1', 'tiles'); // phaser-logo specified in map data
+    mapData.addTilesetImage('1', 'assets-img-ts-tiles'); // phaser-logo specified in map data
     mapData.createLayer('1', '1')
-    new ImageLoader(this)
+    
     new Player(this, 24, 24)
   }
 
   preload() {
     this.load.tilemapTiledJSON('testMapJson', 'assets/maps/1.json')
-    this.load.image('tiles', 'assets/img/tiles.png');
-
-    // this is super annoying you have to load this here, create a loader handler to just load everything
-    this.load.image('idle-unarmed', 'assets/img/player/idle/unarmed.png')
+    this.#imageLoader.preload()
   }
 
   update() {
