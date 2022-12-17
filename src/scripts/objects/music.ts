@@ -1,25 +1,28 @@
 import 'phaser'
 
 export default class Music {
-    #sceneRef: Phaser.Scene
-    #trackKey: string
-    #lastTrackKey: string
-    #track
+    #sceneRef:Phaser.Scene
+    #lastTrackKey:string
+    #trackKey:string
+    #track:Phaser.Sound.BaseSound
+    #soundConfig:Phaser.Types.Sound.SoundConfig = {
+        loop: true,
+        volume: 0.5,
+    }
 
     constructor(scene: Phaser.Scene) {
       this.#sceneRef = scene
     }
 
     setVolume(level:number = 1) {
-        this.#sceneRef.sound.remove(this.#track)
-        this.startNewTrack(this.#trackKey)
+        this.#soundConfig.volume = level
     }
 
-    startNewTrack(trackKey:string) {
+    startTrack(trackKey:string, soundConfig:Phaser.Types.Sound.SoundConfig = this.#soundConfig, forceRestart:boolean = false) {
         this.#trackKey = trackKey
 
         if (this.#track !== undefined) {
-            if (this.#trackKey === this.#lastTrackKey) {
+            if ((this.#trackKey === this.#lastTrackKey) && (!forceRestart)) {
                 return
             } else {
                 this.#track.stop()
@@ -28,14 +31,7 @@ export default class Music {
         }
 
         this.#lastTrackKey = this.#trackKey
-        this.#track = this.#sceneRef.sound.add(trackKey)
+        this.#track = this.#sceneRef.sound.add(trackKey, soundConfig)
         this.#track.play()
-    }
-
-    update() {
-        if (this.#track !== null && !this.#track.isPlaying) {
-            // Loop
-            this.#track.play()
-        }
     }
 }

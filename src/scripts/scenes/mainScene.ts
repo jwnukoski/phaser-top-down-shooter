@@ -20,8 +20,7 @@ export default class MainScene extends Phaser.Scene {
     mapData.createLayer('1', '1')
     
     this.#player = new Player(this, 24, 24)
-    this.#music.startNewTrack('snd-music-dnb')
-    this.#music.startNewTrack('snd-music-atmospheric')
+    this.#music.startTrack('snd-music-atmospheric')
   }
 
   preload() {
@@ -31,7 +30,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.#music.update()
+
   }
 
 }
