@@ -17,6 +17,7 @@ export default class MainScene extends Phaser.Scene {
     mapData.createLayer('1', '1')
     
     new Player(this, 24, 24)
+    this.sound.add('assets-snd-music').play();
   }
 
   preload() {
