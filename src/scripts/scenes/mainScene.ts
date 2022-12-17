@@ -1,6 +1,6 @@
 import Player from '../objects/player/player'
-import ImageLoader from '../helper/img/imageLoader'
-import SoundLoader from '../helper/snd/soundLoader'
+import ImageLoader from '../helpers/img/imageLoader'
+import SoundLoader from '../helpers/snd/soundLoader'
 
 export default class MainScene extends Phaser.Scene {
   #imageLoader:ImageLoader = new ImageLoader(this)
