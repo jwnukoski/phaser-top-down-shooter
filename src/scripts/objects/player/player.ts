@@ -28,8 +28,39 @@ export default class Player extends Phaser.GameObjects.Container {
           this.genAnimConf('walk-unarmed', 10, 17, -1)
       )
       
+      this.#spritesheet.anims.create(
+        this.genAnimConf('walk-punch', 20, 27, -1)
+      )
 
-      this.#spritesheet.play('walk-unarmed');
+      this.#spritesheet.anims.create(
+        this.genAnimConf('walk-handgun', 30, 37, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('walk-rifle', 40, 47, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('run-unarmed', 50, 55, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('run-punch', 60, 65, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('run-handgun', 70, 75, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('run-rifle', 80, 87, -1)
+      )
+
+      this.#spritesheet.anims.create(
+        this.genAnimConf('death', 90, 97, 0)
+      )
+
+      this.#spritesheet.play('run-rifle');
     }
 
     private genAnimConf(key:string, startFrame:number, endFrame:number, repeat:number, frameRate = 8):Phaser.Types.Animations.Animation {
