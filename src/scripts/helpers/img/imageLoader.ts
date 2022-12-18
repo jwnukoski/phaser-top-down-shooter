@@ -31,6 +31,8 @@ export default class ImageLoader {
             } else {
                 this.#sceneRef.load.image(key, path)
             }
+            
+            console.log(key)
         } catch (e) {
             console.error(e)
         }

@@ -16,8 +16,23 @@ export default class Player extends Phaser.GameObjects.Container {
       // this.#activeSprite = scene.add.sprite(0, 0, 'img-player-idle-unarmed').setAngle(-90)
       // this.add(this.#activeSprite)
 
-      const walkUnarmed = scene.add.sprite(0, 0, 'img-player-walk-unarmed').setAngle(-90)
+      
       //scene.anims.create(this.#frameConfig)
+
+      this.createAnimations()
+    }
+
+    private createAnimations() {
+      const walkUnarmed = this.scene.add.sprite(0, 0, 'img-player-walk-ss-48-48-punch').setAngle(-90)
+      this.add(walkUnarmed)
+      
+      walkUnarmed.anims.create({
+        key: 'player-walk-punch',
+        frameRate: 8,
+        frames: this.scene.anims.generateFrameNumbers('img-player-walk-ss-48-48-punch', { start: 0, end: 8 }),
+      })
+
+      walkUnarmed.play('player-walk-punch')
     }
 
     preUpdate(time:number, delta:number):void {
@@ -28,7 +43,7 @@ export default class Player extends Phaser.GameObjects.Container {
       this.#aiming.preUpdate(time, delta) 
     }
 
-    constrainVelocity(sprite = this, maxVelocity) {
+    private constrainVelocity(sprite = this, maxVelocity) {
       // Ensures sprite speed doesnt exceed maxVelocity while update is called
       if (!sprite || !sprite.body)
         return
