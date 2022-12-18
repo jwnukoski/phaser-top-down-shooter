@@ -18,7 +18,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
     preUpdate(time:number, delta:number):void {
       // Constrain velocity of player
-      this.constrainVelocity(this, 250);
+      this.constrainVelocity(this, 250)
     }
 
     constrainVelocity(sprite = this, maxVelocity) {
