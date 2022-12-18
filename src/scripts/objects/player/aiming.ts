@@ -9,7 +9,7 @@ export default class Aiming extends Phaser.GameObjects.Container {
         super(scene, 0, 0)
         this.#playerPhysicsRef = playerPhysics
 
-        this.#crosshairsSprite = scene.add.sprite(0, 0, 'img-player-crosshairs')
+        this.#crosshairsSprite = scene.physics.add.sprite(0, 0, 'img-player-crosshairs')
         this.add(this.#crosshairsSprite)
 
         this.setMouseBehavior()
@@ -32,57 +32,58 @@ export default class Aiming extends Phaser.GameObjects.Container {
         // Move reticle upon locked pointer move
         this.scene.input.on('pointermove', (pointer) => {
             if (this.scene.input.mouse.locked) {
-                this.x += pointer.movementX;
-                this.y += pointer.movementY;
+                this.#crosshairsSprite.x += pointer.movementX;
+                this.#crosshairsSprite.y += pointer.movementY;
             }
         });
     }
 
     constrainReticle(radius) {
         const player = this.#playerPhysicsRef
+        const crosshairs = this.#crosshairsSprite
         const screenWidth = 200
         const screenHeight = 200
 
         // Ensures reticle does not move offscreen and dist(radius) from player
-        var distX = this.x - player.x; // X distance between player & reticle
-        var distY = this.y - player.y; // Y distance between player & reticle
+        const distX = crosshairs.x - player.x; // X distance between player & reticle
+        const distY = crosshairs.y - player.y; // Y distance between player & reticle
 
         // Ensures reticle cannot be moved offscreen
         if (distX > screenWidth)
-            this.x = player.x + screenWidth;
+            crosshairs.x = player.x + screenWidth;
         else if (distX < -screenWidth)
-            this.x = player.x - screenWidth;
+            crosshairs.x = player.x - screenWidth;
 
         if (distY > screenHeight)
-            this.y = player.y + screenHeight;
+            crosshairs.y = player.y + screenHeight;
         else if (distY < -screenHeight)
-            this.y = player.y - screenHeight;
+            crosshairs.y = player.y - screenHeight;
 
         // Ensures reticle cannot be moved further than dist(radius) from player
-        var distBetween = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
+        const distBetween = Phaser.Math.Distance.Between(player.x, player.y, crosshairs.x, crosshairs.y);
         if (distBetween > radius) {
             // Place reticle on perimeter of circle on line intersecting player & reticle
             var scale = distBetween / radius;
 
-            this.x = player.x + (this.x - player.x) / scale;
-            this.y = player.y + (this.y - player.y) / scale;
+            crosshairs.x = player.x + (crosshairs.x - player.x) / scale;
+            crosshairs.y = player.y + (crosshairs.y - player.y) / scale;
         }
     }
 
     preUpdate(time:number, delta:number):void {
         const player = this.#playerPhysicsRef
+        const crosshairs = this.#crosshairsSprite
         const scene:Phaser.Scene = this.scene
         
         // Rotates player to face towards reticle
-        player.rotation = (-90) + Phaser.Math.Angle.Between(player.x, player.y, this.x, this.y)
+        player.rotation = Phaser.Math.Angle.Between(player.x, player.y, crosshairs.x, crosshairs.y)
 
         // Camera follows reticle
-        scene.cameras.main.startFollow(this)
+        scene.cameras.main.startFollow(crosshairs)
 
         // Makes reticle move with player
-        // console.log(player)
-        // this.body.velocity.x  = player.body.velocity.x ?? 0
-        // this.body.velocity.y = player.body.velocity.y ?? 0
+        crosshairs.body.velocity.x  = player.body.velocity.x
+        crosshairs.body.velocity.y = player.body.velocity.y
 
         // Constrain position of reticle to radius around player
         this.constrainReticle(100)
