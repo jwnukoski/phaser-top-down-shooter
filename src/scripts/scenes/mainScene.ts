@@ -19,7 +19,7 @@ export default class MainScene extends Phaser.Scene {
     mapData.addTilesetImage('1', 'img-ts-tiles'); // phaser-logo specified in map data
     mapData.createLayer('1', '1')
     
-    this.#player = new Player(this, 24, 24)
+    this.#player = new Player(this, 150, 150)
     this.#music.startTrack('snd-music-atmospheric')
   }
 
@@ -29,8 +29,8 @@ export default class MainScene extends Phaser.Scene {
     this.#soundLoader.preload()
   }
 
-  update() {
-
+  update(time:number, delta:number) {
+    
   }
 
 }

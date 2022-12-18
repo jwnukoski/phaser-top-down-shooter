@@ -7,6 +7,7 @@ export default [
     'ts_tiles',
 
     /* Player */
+    'player/crosshairs',
     'player/idle/unarmed',
     'player/idle/handgun',
     'player/idle/punch',
