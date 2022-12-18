@@ -1,7 +1,7 @@
 import 'phaser'
 import MainScene from './scenes/mainScene'
 
-const config = {
+const config:Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   backgroundColor: '#000000',
   scale: {

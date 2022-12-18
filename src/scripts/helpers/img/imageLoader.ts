@@ -31,7 +31,7 @@ export default class ImageLoader {
             } else {
                 this.#sceneRef.load.image(key, path)
             }
-            
+
             console.log(key)
         } catch (e) {
             console.error(e)
@@ -41,7 +41,7 @@ export default class ImageLoader {
     private getFrameConfig(imagePath:string):Phaser.Types.Loader.FileTypes.ImageFrameConfig {
         const frameConfig:Phaser.Types.Loader.FileTypes.ImageFrameConfig = {
             frameWidth: 0,
-            frameHeight: 0,
+            frameHeight: 0
         }
 
         const dimensions = imagePath.match(this.#regExpForSpriteSheetDimensions)
