@@ -16,7 +16,7 @@ export default class MainScene extends Phaser.Scene {
   create() {
     var mapData = this.add.tilemap('testMapJson');
     // tiles are 48x48
-    mapData.addTilesetImage('1', 'img-ts-tiles'); // phaser-logo specified in map data
+    mapData.addTilesetImage('1', 'img-tiles'); // phaser-logo specified in map data
     mapData.createLayer('1', '1')
     
     this.#player = new Player(this, 150, 150)

@@ -70,7 +70,6 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     preUpdate(time:number, delta:number):void {
-        console.log(`X:${this.x} Y:${this.y}`)
         const player:Player = this.#playerRef
         const scene:Phaser.Scene = this.scene
         

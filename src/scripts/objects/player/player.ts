@@ -13,10 +13,11 @@ export default class Player extends Phaser.GameObjects.Container {
       this.#aiming = new Aiming(x, y, this, scene)
       // this.add(this.#aiming) <- add this back in when math is fixed
 
-      this.#activeSprite = scene.add.sprite(0, 0, 'img-player-idle-unarmed').setAngle(-90)
-      this.add(this.#activeSprite)
+      // this.#activeSprite = scene.add.sprite(0, 0, 'img-player-idle-unarmed').setAngle(-90)
+      // this.add(this.#activeSprite)
 
-      
+      const walkUnarmed = scene.add.sprite(0, 0, 'img-player-walk-unarmed').setAngle(-90)
+      //scene.anims.create(this.#frameConfig)
     }
 
     preUpdate(time:number, delta:number):void {
