@@ -2,12 +2,12 @@ import 'phaser'
 import Player from './player';
 
 export default class Aiming extends Phaser.GameObjects.Container {
-    #playerRef:Player
+    #playerPhysicsRef:Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
     #crosshairsSprite:Phaser.GameObjects.Sprite
 
-    constructor(x:number, y:number, player:Player, scene:Phaser.Scene) {
-        super(scene, x, y)
-        this.#playerRef = player
+    constructor(playerPhysics:Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, scene:Phaser.Scene) {
+        super(scene, 0, 0)
+        this.#playerPhysicsRef = playerPhysics
 
         this.#crosshairsSprite = scene.add.sprite(0, 0, 'img-player-crosshairs')
         this.add(this.#crosshairsSprite)
@@ -39,7 +39,7 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     constrainReticle(radius) {
-        const player = this.#playerRef
+        const player = this.#playerPhysicsRef
         const screenWidth = 200
         const screenHeight = 200
 
@@ -70,11 +70,11 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     preUpdate(time:number, delta:number):void {
-        const player:Player = this.#playerRef
+        const player = this.#playerPhysicsRef
         const scene:Phaser.Scene = this.scene
         
         // Rotates player to face towards reticle
-        player.rotation = Phaser.Math.Angle.Between(player.x, player.y, this.x, this.y)
+        player.rotation = (-90) + Phaser.Math.Angle.Between(player.x, player.y, this.x, this.y)
 
         // Camera follows reticle
         scene.cameras.main.startFollow(this)
