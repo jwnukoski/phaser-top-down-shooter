@@ -16,6 +16,8 @@ export default class Player extends Phaser.GameObjects.Container {
       this.setupAnimations()
       this.setupAiming(x, y)
       this.setupMovement()
+
+      this.scene.physics.add.group()
     }
 
     private setupSpritesheet(x:number, y:number) {
@@ -84,7 +86,7 @@ export default class Player extends Phaser.GameObjects.Container {
       )
 
       // test
-      this.#spritesheetWithPhysics.play('run-rifle');
+      this.#spritesheetWithPhysics.play('run-handgun');
     }
 
     private genAnimConf(key:string, startFrame:number, endFrame:number, repeat:number, frameRate = 8):Phaser.Types.Animations.Animation {
