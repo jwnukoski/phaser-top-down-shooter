@@ -1,22 +1,18 @@
 import 'phaser'
 
-export default class animations extends Phaser.GameObjects.Sprite {
+export default class Animations extends Phaser.GameObjects.Sprite {
     #spritesheetKey:string
     #playerContainerRef:Phaser.GameObjects.Container
 
-    constructor(scene:Phaser.Scene, x:number, y:number, spritesheetKey:string = 'img-player-ss-48-48-player', playerContainer:Phaser.GameObjects.Container) {
+    constructor(scene:Phaser.Scene, x:number, y:number, playerContainer:Phaser.GameObjects.Container, spritesheetKey:string = 'img-player-ss-48-48-player') {
         super(scene, x, y, spritesheetKey)
         scene.add.existing(this)
         this.#spritesheetKey = spritesheetKey
         this.#playerContainerRef = playerContainer
 
-        this.setupSpritesheet(x, y)
+        this.scene.physics.add.sprite(x, y, spritesheetKey)
+        this.#playerContainerRef.add(this)
         this.setupAnimations()
-    }
-
-    private setupSpritesheet(x:number, y:number) {
-      this.scene.physics.add.sprite(x, y, this.#spritesheetKey)
-      this.#playerContainerRef.add(this)
     }
 
     private setupAnimations() {

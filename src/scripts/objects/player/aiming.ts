@@ -1,13 +1,13 @@
 import 'phaser'
-import Player from './player';
+import Animations from './animations'
 
 export default class Aiming extends Phaser.GameObjects.Container {
-    #playerPhysicsRef:Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
     #crosshairsSprite:Phaser.GameObjects.Sprite
-
-    constructor(playerPhysics:Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, scene:Phaser.Scene) {
+    #playerAnimations:Animations
+    
+    constructor(playerAnimations:Animations, scene:Phaser.Scene) {
         super(scene, 0, 0)
-        this.#playerPhysicsRef = playerPhysics
+        this.#playerAnimations = playerAnimations
 
         this.#crosshairsSprite = scene.physics.add.sprite(0, 0, 'img-player-crosshairs')
         this.add(this.#crosshairsSprite)
@@ -39,7 +39,7 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     constrainReticle(radius) {
-        const player = this.#playerPhysicsRef
+        const player = this.#playerAnimations
         const crosshairs = this.#crosshairsSprite
         const screenWidth = 200
         const screenHeight = 200
@@ -71,22 +71,26 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     preUpdate(time:number, delta:number):void {
-        const player = this.#playerPhysicsRef
+        const player = this.#playerAnimations
         const crosshairs = this.#crosshairsSprite
         const scene:Phaser.Scene = this.scene
         
-        // Rotates player to face towards reticle
-        player.rotation = Phaser.Math.Angle.Between(player.x, player.y, crosshairs.x, crosshairs.y)
-
-        // Camera follows reticle
-        scene.cameras.main.startFollow(crosshairs)
-
-        // Makes reticle move with player
-        crosshairs.body.velocity.x  = player.body.velocity.x
-        crosshairs.body.velocity.y = player.body.velocity.y
-
-        // Constrain position of reticle to radius around player
-        this.constrainReticle(100)
+        try {
+            // Rotates player to face towards reticle
+            player.rotation = Phaser.Math.Angle.Between(player.x, player.y, crosshairs.x, crosshairs.y)
+    
+            // Camera follows reticle
+            scene.cameras.main.startFollow(crosshairs)
+    
+            // Makes reticle move with player
+            crosshairs.body.velocity.x  = player.body.velocity.x
+            crosshairs.body.velocity.y = player.body.velocity.y
+    
+            // Constrain position of reticle to radius around player
+            this.constrainReticle(100)
+        } catch (e) {
+            console.error
+        }
     }
 }
   

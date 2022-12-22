@@ -89,7 +89,11 @@ export default class Movement {
     }
 
     preUpdate(time:number, delta:number) {
-        this.setMotionState(this.verticalMovement(), this.horizontalMovement(), this.runMovement())
+        try {
+            this.setMotionState(this.verticalMovement(), this.horizontalMovement(), this.runMovement())
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
   
