@@ -7,7 +7,7 @@ export default class Player extends Phaser.GameObjects.Container {
     #aiming:Aiming
     #movement:Movement
     #animations:any
-    #spritesheetWithPhysics:Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
+    #weaponState:string = 'unarmed'
 
     constructor(scene:Phaser.Scene, x:number, y:number) {
       super(scene, 0, 0)
@@ -15,41 +15,17 @@ export default class Player extends Phaser.GameObjects.Container {
 
       this.#animations = new Animations(scene, x, y, this)
       this.#aiming = new Aiming(this.#animations, scene)
-      this.setupMovement()
-
-      this.scene.physics.add.group()
+      this.#movement = new Movement(this, this.#animations)
     }
 
-    private setupMovement() {
-      this.#movement = new Movement(this, this.#spritesheetWithPhysics)
-    }
-
-    private pickAnimation():void {
-      const motionState:string = this.#movement.getMotionState()
-
-      switch(motionState) {
-        case 'idle':
-          this.#animations.playAnimIfNotAlready('idle-handgun')
-        break
-        
-        case 'run':
-          this.#animations.playAnimIfNotAlready('run-handgun')
-        break
-
-        case 'walk':
-          this.#animations.playAnimIfNotAlready('walk-handgun')
-        break
-      }
-    }
-
-    preUpdate(time:number, delta:number):void {
+    preUpdate():void {
       this.constrainVelocity(this, 250)
-      this.#aiming.preUpdate(time, delta)
-      this.#movement.preUpdate(time, delta) 
-      this.pickAnimation()
+      this.#aiming.preUpdate()
+      this.#movement.preUpdate() 
+      this.#animations.pickAnimation(`${this.#movement.getMotionState()}-${this.#weaponState}`)
     }
 
-    private constrainVelocity(sprite = this, maxVelocity) {
+    private constrainVelocity(sprite = this.#animations, maxVelocity) {
       // Ensures sprite speed doesnt exceed maxVelocity while update is called
       if (!sprite || !sprite.body)
         return

@@ -54,8 +54,6 @@ export default class ImageLoader {
             console.error(`${imagePath} was parsed as having a ${frameConfig.frameWidth} frameWidth and ${frameConfig.frameHeight} frameHeight`)
         }
 
-        console.log(frameConfig)
-
         return frameConfig
     }
 }

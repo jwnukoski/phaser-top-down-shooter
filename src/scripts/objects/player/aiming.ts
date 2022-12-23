@@ -70,27 +70,23 @@ export default class Aiming extends Phaser.GameObjects.Container {
         }
     }
 
-    preUpdate(time:number, delta:number):void {
+    preUpdate():void {
         const player = this.#playerAnimations
         const crosshairs = this.#crosshairsSprite
         const scene:Phaser.Scene = this.scene
         
-        try {
-            // Rotates player to face towards reticle
-            player.rotation = Phaser.Math.Angle.Between(player.x, player.y, crosshairs.x, crosshairs.y)
-    
-            // Camera follows reticle
-            scene.cameras.main.startFollow(crosshairs)
-    
-            // Makes reticle move with player
-            crosshairs.body.velocity.x  = player.body.velocity.x
-            crosshairs.body.velocity.y = player.body.velocity.y
-    
-            // Constrain position of reticle to radius around player
-            this.constrainReticle(100)
-        } catch (e) {
-            console.error
-        }
+        // Rotates player to face towards reticle
+        player.rotation = Phaser.Math.Angle.Between(player.x, player.y, crosshairs.x, crosshairs.y)
+
+        // Camera follows reticle
+        scene.cameras.main.startFollow(crosshairs)
+
+        // Makes reticle move with player
+        crosshairs.body.velocity.x  = player.body.velocity.x
+        crosshairs.body.velocity.y = player.body.velocity.y
+
+        // Constrain position of reticle to radius around player
+        this.constrainReticle(100)
     }
 }
   

@@ -29,7 +29,7 @@ export default class MainScene extends Phaser.Scene {
     this.#soundLoader.preload()
   }
 
-  update(time:number, delta:number) {
+  update() {
     
   }
 

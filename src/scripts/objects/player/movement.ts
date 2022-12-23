@@ -32,12 +32,12 @@ export default class Movement {
 
         if (this.#moveKeys['w'].isDown) {
             isMoving = true
-            this.#physicsRef.setVelocityY(-this.#moveSpeed)
+            this.#physicsRef.body.setVelocityY(-this.#moveSpeed)
         } else if (this.#moveKeys['s'].isDown) {
             isMoving = true
-            this.#physicsRef.setVelocityY(this.#moveSpeed)
+            this.#physicsRef.body.setVelocityY(this.#moveSpeed)
         } else if (this.#moveKeys['w'].isUp && this.#moveKeys['s'].isUp) {
-            this.#physicsRef.setVelocityY(0)
+            this.#physicsRef.body.setVelocityY(0)
         }
 
         return isMoving
@@ -48,12 +48,12 @@ export default class Movement {
 
         if (this.#moveKeys['a'].isDown) {
             isMoving = true
-            this.#physicsRef.setVelocityX(-this.#moveSpeed)
+            this.#physicsRef.body.setVelocityX(-this.#moveSpeed)
         } else if (this.#moveKeys['d'].isDown) {
             isMoving = true
-            this.#physicsRef.setVelocityX(this.#moveSpeed)
+            this.#physicsRef.body.setVelocityX(this.#moveSpeed)
         } else if (this.#moveKeys['a'].isUp && this.#moveKeys['d'].isUp) {
-            this.#physicsRef.setVelocityX(0)
+            this.#physicsRef.body.setVelocityX(0)
         }
 
         return isMoving
@@ -88,12 +88,8 @@ export default class Movement {
         return this.#motionState
     }
 
-    preUpdate(time:number, delta:number) {
-        try {
-            this.setMotionState(this.verticalMovement(), this.horizontalMovement(), this.runMovement())
-        } catch (e) {
-            console.error(e)
-        }
+    preUpdate() {
+        this.setMotionState(this.verticalMovement(), this.horizontalMovement(), this.runMovement())
     }
 }
   

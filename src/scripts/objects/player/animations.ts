@@ -10,12 +10,16 @@ export default class Animations extends Phaser.GameObjects.Sprite {
         this.#spritesheetKey = spritesheetKey
         this.#playerContainerRef = playerContainer
 
-        this.scene.physics.add.sprite(x, y, spritesheetKey)
+        this.scene.physics.add.existing(this)
         this.#playerContainerRef.add(this)
         this.setupAnimations()
     }
 
     private setupAnimations() {
+      this.anims.create(
+        this.genAnimConf('idle-unarmed', 10, 10, 0)
+      )
+
       this.anims.create(
         this.genAnimConf('idle-punch', 0, 3, -1)
       )
@@ -80,7 +84,11 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       }
     }
 
-    public playAnimIfNotAlready(key:string) {
+    public pickAnimation(state:string):void {
+      this.playAnimIfNotAlready(state)
+    }
+
+    private playAnimIfNotAlready(key:string) {
       if (this.anims.currentAnim.key !== key)
         this.play(key)
     }
