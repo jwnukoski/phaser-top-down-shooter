@@ -4,6 +4,9 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     #spritesheetKey:string
     #playerContainerRef:Phaser.GameObjects.Container
 
+    #stepVariant:number = 1
+    #lastStepFrame:number = -1
+
     constructor(scene:Phaser.Scene, x:number, y:number, playerContainer:Phaser.GameObjects.Container, spritesheetKey:string = 'img-player-ss-48-48-player') {
         super(scene, x, y, spritesheetKey)
         scene.add.existing(this)
@@ -91,6 +94,50 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     private playAnimIfNotAlready(key:string) {
       if (this.anims.currentAnim.key !== key)
         this.play(key)
+    }
+
+    private advanceStepVariant() {
+      if (this.#stepVariant < 4)
+        this.#stepVariant++
+      else
+        this.#stepVariant = 1
+
+      console.log(this.#stepVariant)
+    }
+
+    private stepFrameSounds(animKey:string, animFrame:number) {
+      let playWalk:boolean = false
+
+      if (animKey === 'walk-unarmed' || animKey === 'walk-punch' || animKey === 'walk-handgun' || animKey === 'walk-rifle')
+        playWalk = (animFrame === 3 || animFrame === 7)
+
+      if (animKey === 'run-unarmed' || animKey === 'run-punch' || animKey === 'run-handgun')
+        playWalk = (animFrame === 2 || animFrame === 5)
+
+      if (animKey === 'run-rifle')
+        playWalk = (animFrame === 2 || animFrame === 5 || animFrame === 8)
+
+      
+      if (playWalk && this.#lastStepFrame !== animFrame) {
+        this.#lastStepFrame = animFrame // prevent sound from playing on same frame again
+        const stepSoundKey = `snd-common-step${this.#stepVariant}`
+        this.advanceStepVariant()
+
+        if (this.#playerContainerRef.scene.sound.get(stepSoundKey)?.play()) {
+          return
+        } else {
+          this.#playerContainerRef.scene.sound.add(stepSoundKey, {
+            loop: false,
+            volume: 0.5,
+          }).play()
+        }
+      }
+    }
+
+    public frameSounds() {
+      const animKey:string = this.anims.currentAnim.key ?? ''
+      const animFrame:number = this.anims.currentFrame.index ?? -1
+      this.stepFrameSounds(animKey, animFrame)
     }
 }
   

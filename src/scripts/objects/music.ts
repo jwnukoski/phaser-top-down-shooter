@@ -7,7 +7,7 @@ export default class Music {
     #track:Phaser.Sound.BaseSound
     #soundConfig:Phaser.Types.Sound.SoundConfig = {
         loop: true,
-        volume: 0.5,
+        volume: 0.10,
     }
 
     constructor(scene: Phaser.Scene) {
