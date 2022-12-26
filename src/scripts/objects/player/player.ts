@@ -22,7 +22,6 @@ export default class Player extends Phaser.GameObjects.Container {
       this.#aiming.preUpdate()
       this.#movement.preUpdate() 
       this.#animations.pickAnimation(`${this.#movement.getMotionState()}-${this.#weaponState}`)
-      this.#animations.frameSounds()
     }
 }
   

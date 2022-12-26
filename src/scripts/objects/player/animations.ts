@@ -32,7 +32,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       )
 
       this.anims.create(
-        this.genAnimConf('idle-rifle', 40, 47, 0)
+        this.genAnimConf('idle-rifle', 40, 40, 0)
       )
 
       this.anims.create(
@@ -89,6 +89,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
 
     public pickAnimation(state:string):void {
       this.playAnimIfNotAlready(state)
+      this.playFrameSounds()
     }
 
     private playAnimIfNotAlready(key:string) {
@@ -134,7 +135,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       }
     }
 
-    public frameSounds() {
+    private playFrameSounds() {
       const animKey:string = this.anims.currentAnim.key ?? ''
       const animFrame:number = this.anims.currentFrame.index ?? -1
       this.stepFrameSounds(animKey, animFrame)
