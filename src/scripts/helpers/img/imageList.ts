@@ -7,6 +7,7 @@ export default [
     'ss_48_48_bloodSpray',
     'items',
     'tiles',
+    'bullet',
 
     /* Player */
     'player/crosshairs',
