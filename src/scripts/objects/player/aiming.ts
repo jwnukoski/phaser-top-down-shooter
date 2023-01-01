@@ -36,6 +36,14 @@ export default class Aiming extends Phaser.GameObjects.Container {
                 this.#crosshairsSprite.y += pointer.movementY;
             }
         });
+
+        // Fires bullet from player on left click of mouse
+        this.scene.input.on('pointerdown', (pointer, time, lastFired) => {
+            if (this.#playerAnimations.active === false)
+                return
+
+            // new bullet here?
+        }, this);
     }
 
     constrainReticle(radius) {
