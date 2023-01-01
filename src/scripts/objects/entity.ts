@@ -1,4 +1,5 @@
 import 'phaser'
+import Bullet from './bullet'
 
 // Base class for anything 'alive' in the game
 export default class Entity extends Phaser.GameObjects.Container {
@@ -12,11 +13,13 @@ export default class Entity extends Phaser.GameObjects.Container {
       this.#maxHealth = maxHealth
     }
 
-    public damage(amount:number) {
+    public damage(amount:number, bullet:Bullet) {
         this.#health -= amount
         
         if (this.#health < 0)
             this.#health = 0
+
+        bullet.destroy()
     }
 
     public heal(amount:number) {

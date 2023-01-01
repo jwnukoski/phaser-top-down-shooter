@@ -27,8 +27,8 @@ export default class MainScene extends Phaser.Scene {
     this.#music.startTrack('snd-music-atmospheric')
 
     // Add 2 groups for Bullet objects
-    this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true });
-    this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true });
+    this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
+    this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
   }
 
   preload() {

@@ -3,6 +3,7 @@ import Aiming from './aiming'
 import Movement from './movement'
 import Animations from './animations'
 import Entity from '../entity'
+import Bullet from '../bullet'
 
 export default class Player extends Entity {
     #aiming:Aiming
@@ -16,6 +17,8 @@ export default class Player extends Entity {
       this.#animations = new Animations(scene, x, y, this)
       this.#aiming = new Aiming(this.#animations, scene)
       this.#movement = new Movement(this, this.#animations)
+
+      new Bullet(scene, x, y, this, this.#aiming) // test
     }
 
     preUpdate():void {
