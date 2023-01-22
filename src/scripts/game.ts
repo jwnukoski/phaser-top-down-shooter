@@ -1,5 +1,5 @@
 import 'phaser'
-import MainScene from './scenes/mainScene'
+import WorldScene from './scenes/worldScene'
 
 const config:Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -12,12 +12,15 @@ const config:Phaser.Types.Core.GameConfig = {
     height: 300
   },
   pixelArt: true,
-  scene: [MainScene],
+  scene: [WorldScene],
   physics: {
     default: 'arcade',
     arcade: {
       debug: true
     }
+  },
+  input: {
+    mouse: true
   }
 }
 

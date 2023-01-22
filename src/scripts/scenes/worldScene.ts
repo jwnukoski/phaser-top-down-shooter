@@ -4,14 +4,14 @@ import SoundLoader from '../helpers/snd/soundLoader'
 import Music from '../objects/music'
 import Bullet from '../objects/bullet'
 
-export default class MainScene extends Phaser.Scene {
+export default class WorldScene extends Phaser.Scene {
   #imageLoader:ImageLoader = new ImageLoader(this)
   #soundLoader:SoundLoader = new SoundLoader(this)
   #music:Music = new Music(this)
   #player: Player
 
-  #playerBullets
-  #enemyBullets
+  #playerBullets:Phaser.Physics.Arcade.Group
+  #enemyBullets:Phaser.Physics.Arcade.Group
 
   constructor() {
     super({ key: 'MainScene' })
@@ -29,6 +29,18 @@ export default class MainScene extends Phaser.Scene {
     // Add 2 groups for Bullet objects
     this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
     this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
+  }
+
+  getPlayer():Player {
+    return this.#player
+  }
+
+  getPlayerBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
+    return this.#playerBullets
+  }
+
+  getEnemyBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
+    return this.#enemyBullets
   }
 
   preload() {

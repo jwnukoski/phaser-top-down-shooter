@@ -1,4 +1,5 @@
 import 'phaser'
+import Bullet from '../bullet'
 import Animations from './animations'
 
 export default class Aiming extends Phaser.GameObjects.Container {
@@ -15,6 +16,10 @@ export default class Aiming extends Phaser.GameObjects.Container {
         this.setMouseBehavior()
 
         this.scene.add.existing(this)
+    }
+
+    public getCrosshairsSprite():Phaser.GameObjects.Sprite {
+        return this.#crosshairsSprite
     }
 
     setMouseBehavior() {
@@ -41,7 +46,8 @@ export default class Aiming extends Phaser.GameObjects.Container {
         this.scene.input.on('pointerdown', (pointer, time, lastFired) => {
             if (this.#playerAnimations.active === false)
                 return
-
+            
+                
             // new bullet here?
         }, this);
     }
