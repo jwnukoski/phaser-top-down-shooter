@@ -13,7 +13,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
         this.#spritesheetKey = spritesheetKey
         this.#playerContainerRef = playerContainer
 
-        this.scene.physics.add.existing(this)
+        scene.physics.add.existing(this)
         this.#playerContainerRef.add(this)
         this.setupAnimations()
     }

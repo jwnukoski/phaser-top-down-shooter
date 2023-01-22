@@ -3,6 +3,7 @@ import ImageLoader from '../helpers/img/imageLoader'
 import SoundLoader from '../helpers/snd/soundLoader'
 import Music from '../objects/music'
 import Bullet from '../objects/bullet'
+import Entity from '../objects/entity'
 
 export default class WorldScene extends Phaser.Scene {
   #imageLoader:ImageLoader = new ImageLoader(this)
@@ -12,34 +13,40 @@ export default class WorldScene extends Phaser.Scene {
 
   #playerBullets:Phaser.Physics.Arcade.Group
   #enemyBullets:Phaser.Physics.Arcade.Group
+  #enemies:Phaser.Physics.Arcade.Group
 
   constructor() {
     super({ key: 'MainScene' })
   }
 
   create() {
-    var mapData = this.add.tilemap('testMapJson');
-    // tiles are 48x48
-    mapData.addTilesetImage('1', 'img-tiles'); // phaser-logo specified in map data
+    const mapData = this.add.tilemap('testMapJson');
+    mapData.addTilesetImage('1', 'img-tiles')
     mapData.createLayer('1', '1')
     
     this.#player = new Player(this, 150, 150)
-    this.#music.startTrack('snd-music-atmospheric')
+    this.#music.startTrack('snd-music-atmospheric') // test
 
-    // Add 2 groups for Bullet objects
     this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
+    this.#enemies = this.physics.add.group()
     this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
   }
 
-  getPlayer():Player {
+  public getPlayer():Player {
+    console.log('GET PLAYER:')
+    console.log(this.#player)
     return this.#player
   }
 
-  getPlayerBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
+  public getPlayerBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
     return this.#playerBullets
   }
 
-  getEnemyBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
+  public getEnemyGroup():Phaser.Physics.Arcade.Group {
+    return this.#enemies
+  }
+
+  public getEnemyBulletsPhysicsGroup():Phaser.Physics.Arcade.Group {
     return this.#enemyBullets
   }
 

@@ -20,6 +20,8 @@ export default class ImageLoader {
                             .replaceAll('.png', '')
                             .toLowerCase()
 
+            console.log(key)
+
             this.loadAsImageOrSprite(imagePath, path, key)
         }
     }

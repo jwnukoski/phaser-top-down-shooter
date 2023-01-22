@@ -16,9 +16,8 @@ export default class Player extends Entity {
       super(scene, 0, 0, 100, 100, true, true)
 
       this.#animations = new Animations(scene, x, y, this)
-      this.#aiming = new Aiming(this.#animations, scene)
+      this.#aiming = new Aiming(this.#animations, scene, this)
       this.#movement = new Movement(this, this.#animations)
-
     }
 
     public getCrosshairsSprite() {

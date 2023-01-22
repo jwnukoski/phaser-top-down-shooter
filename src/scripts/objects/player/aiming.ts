@@ -1,15 +1,17 @@
 import 'phaser'
-import Bullet from '../bullet'
+import WorldScene from '../../scenes/worldScene'
 import Animations from './animations'
+import Player from './player'
 
 export default class Aiming extends Phaser.GameObjects.Container {
     #crosshairsSprite:Phaser.GameObjects.Sprite
     #playerAnimations:Animations
-    
-    constructor(playerAnimations:Animations, scene:Phaser.Scene) {
+    #playerRef:Player
+
+    constructor(playerAnimations:Animations, scene:WorldScene, player:Player) {
         super(scene, 0, 0)
         this.#playerAnimations = playerAnimations
-
+        this.#playerRef = player
         this.#crosshairsSprite = scene.physics.add.sprite(0, 0, 'img-player-crosshairs')
         this.add(this.#crosshairsSprite)
 
@@ -26,6 +28,10 @@ export default class Aiming extends Phaser.GameObjects.Container {
         // Locks pointer on mousedown
         this.scene.game.canvas.addEventListener('mousedown', () => {
             this.scene.input.mouse.requestPointerLock();
+            
+            // test
+            this.#playerRef.setCanShoot(true)
+            this.#playerRef.shoot(this.#crosshairsSprite, this.#playerAnimations)
         });
 
         // Exit pointer lock when Q or escape (by default) is pressed.

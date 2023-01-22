@@ -72,32 +72,22 @@ export default class Entity extends Phaser.GameObjects.Container {
         return this.#canShoot && this.isAlive()
     }
 
-    public shoot() {
+    public shoot(target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, shooter:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite = this, shooterX:number = shooter.x, shooterY:number = shooter.y) {        
         if (!this.getCanShoot())
-        return
-        
-        console.log('shoot!')
-
-        let bullet:Bullet
-
-        if (this.#isPlayer) 
-            bullet = this.#worldSceneRef.getPlayerBulletsPhysicsGroup().get().setActive(true).setVisible(true)
-        else
-            bullet = this.#worldSceneRef.getEnemyBulletsPhysicsGroup().get().setActive(true).setVisible(true)
-
-        if (!bullet)
             return
+        
+        new Bullet(this.#worldSceneRef,
+                    shooterX, shooterY, 
+                    shooter, 
+                    target)
 
         if (this.#isPlayer) {
-            new Bullet(this.#worldSceneRef, this.x, this.y, 
-                        this.#worldSceneRef.getPlayer(), 
-                        this.#worldSceneRef.getPlayer().getCrosshairsSprite())
-                        
+            // Player physics collider with rest of enemies layer and hitcallback
             // this.#worldSceneRef.physics.add.collider(this.#worldSceneRef.getEnemyBulletsPhysicsGroup(), bullet, enemyHitCallback);
         }
 
         if (!this.#isPlayer) {
-
+            // Enemy physics collider with player and hitcallback
         }
     }
 }

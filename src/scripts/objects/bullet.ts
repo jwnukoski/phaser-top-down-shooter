@@ -1,4 +1,5 @@
 import 'phaser'
+import WorldScene from '../scenes/worldScene'
 import Entity from './entity'
 
 export default class Bullet extends Phaser.GameObjects.Image {
@@ -8,12 +9,11 @@ export default class Bullet extends Phaser.GameObjects.Image {
     #xSpeed = 0
     #ySpeed = 0
     
-    constructor(scene:Phaser.Scene, x:number, y:number, shooter:Entity, target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite) {
+    constructor(scene:WorldScene, x:number, y:number, shooter:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite) {
         // https://phaser.io/examples/v3/view/games/top-down-shooter/topdowncombatmechanics
-        super(scene, x, y, 'bullet')
-     
-        // this.setSize(8, 8) // needed?
-        // this.setPosition(shooter.x, shooter.y) // needed?
+        super(scene, x, y, 'img-bullet')
+        scene.add.existing(this)
+        scene.physics.add.existing(this) // may need to remove this in favor of grouped physics for collision
 
         this.#direction = Math.atan((target.x - this.x) / (target.y - this.y))
 
