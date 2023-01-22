@@ -102,8 +102,6 @@ export default class Animations extends Phaser.GameObjects.Sprite {
         this.#stepVariant++
       else
         this.#stepVariant = 1
-
-      console.log(this.#stepVariant)
     }
 
     private stepFrameSounds(animKey:string, animFrame:number) {
