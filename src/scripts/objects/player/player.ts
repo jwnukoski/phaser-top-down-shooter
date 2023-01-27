@@ -2,15 +2,15 @@ import 'phaser'
 import Aiming from './aiming'
 import Movement from './movement'
 import Animations from './animations'
+import Weapons from './weapons'
 import Entity from '../entity'
-import Bullet from '../bullet'
 import WorldScene from '../../scenes/worldScene'
 
 export default class Player extends Entity {
     #aiming:Aiming
     #movement:Movement
     #animations:any
-    #weaponState:string = 'unarmed'
+    #weapons:Weapons
 
     constructor(scene:WorldScene, x:number, y:number) {
       super(scene, 0, 0, 100, 100, true, true)
@@ -18,6 +18,7 @@ export default class Player extends Entity {
       this.#animations = new Animations(scene, x, y, this)
       this.#aiming = new Aiming(this.#animations, scene, this)
       this.#movement = new Movement(this, this.#animations)
+      this.#weapons = new Weapons(this)
     }
 
     public getCrosshairsSprite() {
@@ -27,7 +28,7 @@ export default class Player extends Entity {
     preUpdate():void {
       this.#aiming.preUpdate()
       this.#movement.preUpdate() 
-      this.#animations.pickAnimation(`${this.#movement.getMotionState()}-${this.#weaponState}`)
+      this.#animations.pickAnimation(`${this.#movement.getMotionState()}-${this.#weapons.getCurrentWeapon()}`)
     }
 }
   
