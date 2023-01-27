@@ -1,5 +1,3 @@
-import Player from './player/player'
-
 export default class Weapon {
     #name:string
     #fireRate:number
@@ -37,14 +35,20 @@ export default class Weapon {
     }
 
     private removeRounds(amount:number) {
-        // TODO
+        // TODO: This could be wrong
         if (this.#rounds <= 0 || amount <= 0)
             return false
 
-        let remainder = (this.#rounds - amount)
-
-        if (remainder < 0)
+        const difference = (this.#rounds - amount)
+        if (difference < 0)
+            amount -= Math.floor(difference)
             
+        this.#rounds -= amount
+
+        if (this.#rounds < 0) {
+            this.#rounds = 0
+            return false
+        }
 
         return true
     }
@@ -83,7 +87,7 @@ export default class Weapon {
     public reloadMagazine() {
         // TODO
         const spaceLeftInMagazine = (this.#magazineSize - this.#magazineRounds)
-
+        const successful = this.removeRounds(spaceLeftInMagazine)
     }
 }
   
