@@ -31,7 +31,10 @@ export default class Aiming extends Phaser.GameObjects.Container {
             
             // test
             this.#playerRef.setCanShoot(true)
-            this.#playerRef.shoot(this.#crosshairsSprite, this.#playerAnimations)
+            this.#playerRef.shoot({
+                target: this.#crosshairsSprite,
+                shooter: this.#playerAnimations
+            })
         });
 
         // Exit pointer lock when Q or escape (by default) is pressed.

@@ -1,5 +1,5 @@
 import 'phaser'
-import { Weapon, WeaponInterface } from './weapon'
+import { Weapon } from './weapon'
 
 export default class AssaultRifle extends Weapon {
     constructor() {

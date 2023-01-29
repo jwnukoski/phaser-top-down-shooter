@@ -13,7 +13,15 @@ export default class Player extends Entity {
     #weapons:Weapons
 
     constructor(scene:WorldScene, x:number, y:number) {
-      super(scene, 0, 0, 100, 100, true, true)
+      super({
+        worldSceneRef: scene,
+        x: 0,
+        y: 0,
+        health: 100,
+        maxHealth: 100,
+        bleeds: true,
+        isPlayer: true
+      })
 
       this.#animations = new Animations(scene, x, y, this)
       this.#aiming = new Aiming(this.#animations, scene, this)

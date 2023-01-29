@@ -10,7 +10,7 @@ export interface BulletInterface {
     target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite
 }
 
-export class Bullet extends Phaser.GameObjects.Image {
+export default class Bullet extends Phaser.GameObjects.Image {
     #speed = 1
     #born = 0
     #direction = 0
