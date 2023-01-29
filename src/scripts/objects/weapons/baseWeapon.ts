@@ -1,4 +1,4 @@
-export default class Weapon {
+export default class BaseWeapon {
     #name:string
     #fireRate:number
     #rounds:number
