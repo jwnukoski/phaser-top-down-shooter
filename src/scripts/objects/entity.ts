@@ -19,8 +19,7 @@ export interface ShootParams {
     shooterY?:number,
 }
 
-// Base class for anything 'alive' in the game
-export default class Entity extends Phaser.GameObjects.Container {
+export default class Entity extends Phaser.GameObjects.Container implements EntityParams {
     health:number = 100
     maxHealth:number = 100
     bleeds:boolean = true
