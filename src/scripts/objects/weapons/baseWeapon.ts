@@ -1,10 +1,10 @@
 export interface Weapon {
-    name:string, // friendly name of weapon
-    fireRate:number, // time between a attack/round
-    magazineSize:number, // max rounds that can fit in a magazine
-    rounds:number, // starting rounds out of magazine
-    magazineRounds:number, // starting rounds in magazine
-    isMelee:boolean, // infinite ammo */
+    name:string,            // friendly name of weapon
+    fireRate:number,        // time between a attack/round
+    magazineSize:number,    // max rounds that can fit in a magazine
+    rounds:number,          // starting rounds out of magazine
+    magazineRounds:number,  // starting rounds in magazine
+    isMelee:boolean,        // infinite ammo
 }
 
 export class BaseWeapon implements Weapon {
