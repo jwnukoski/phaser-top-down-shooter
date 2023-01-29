@@ -1,5 +1,4 @@
 import Player from './player'
-import Weapon from '../weapon'
 
 export default class Weapons {
     #weaponState:string = 'unarmed'

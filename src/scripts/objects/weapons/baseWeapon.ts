@@ -1,52 +1,39 @@
-export default class BaseWeapon {
-    #name:string
-    #fireRate:number
-    #rounds:number
-    #magazineRounds:number
-    #magazineSize:number
-    #utilizesRounds:boolean
+export interface Weapon {
+    name:string, // friendly name of weapon
+    fireRate:number, // time between a attack/round
+    magazineSize:number, // max rounds that can fit in a magazine
+    rounds:number, // starting rounds out of magazine
+    magazineRounds:number, // starting rounds in magazine
+    isMelee:boolean, // infinite ammo */
+}
 
-    constructor(name:string, fireRate:number, magazineSize:number = 0, startingRounds:number = 0, startingMagazineRounds:number = 0, utilizesRounds:boolean = true) {
-        this.#name = name
-        this.#fireRate = fireRate
-        this.#magazineSize = magazineSize
-        this.#rounds = startingRounds
-        this.#magazineRounds = startingMagazineRounds
-        this.#utilizesRounds = utilizesRounds
+export class BaseWeapon implements Weapon {
+    name:string = '???'
+    fireRate:number = 1
+    magazineSize: number = 0
+    rounds:number = 0
+    magazineRounds:number = 0
+    isMelee:boolean = false
 
-        if (!utilizesRounds)
-            this.#magazineRounds, this.#rounds, this.#magazineSize = -1
-    }
-
-    public getName():string {
-        return this.#name
-    }
-
-    public getRounds():number {
-        return this.#rounds
-    }
-
-    public getMagazineRounds():number {
-        return this.#magazineRounds
-    }
-
-    public getUtilizesRounds():boolean {
-        return this.#utilizesRounds
+    constructor(startingWeaponParameters:Weapon) {
+        for (const key of Object.keys(startingWeaponParameters)) {
+            this[key] = startingWeaponParameters[key]
+        }
     }
 
     private removeRounds(amount:number) {
         // TODO: This could be wrong
-        if (this.#rounds <= 0 || amount <= 0)
+        if (this.rounds <= 0 || amount <= 0)
             return false
 
-        const difference = (this.#rounds - amount)
+        const difference = (this.rounds - amount)
         if (difference < 0)
             amount -= Math.floor(difference)
             
-        this.#rounds -= amount
+        this.rounds -= amount
 
-        if (this.#rounds < 0) {
-            this.#rounds = 0
+        if (this.rounds < 0) {
+            this.rounds = 0
             return false
         }
 
@@ -54,11 +41,11 @@ export default class BaseWeapon {
     }
 
     private removeRoundFromMagazine():boolean {
-        if (!this.#utilizesRounds)
-            return true
+        if (this.isMelee)
+            return false
 
-        if (this.#rounds > 0) {
-            this.#magazineRounds--
+        if (this.rounds > 0) {
+            this.magazineRounds--
             return true
         }
 
@@ -86,7 +73,7 @@ export default class BaseWeapon {
 
     public reloadMagazine() {
         // TODO
-        const spaceLeftInMagazine = (this.#magazineSize - this.#magazineRounds)
+        const spaceLeftInMagazine = (this.magazineSize - this.magazineRounds)
         const successful = this.removeRounds(spaceLeftInMagazine)
     }
 }
