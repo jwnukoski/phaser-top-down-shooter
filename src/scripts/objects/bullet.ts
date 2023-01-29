@@ -2,7 +2,7 @@ import 'phaser'
 import WorldScene from '../scenes/worldScene'
 import Entity from './entity'
 
-export interface BulletInterface {
+export interface BulletParams {
     scene:WorldScene, 
     x:number, 
     y:number, 
@@ -17,24 +17,24 @@ export default class Bullet extends Phaser.GameObjects.Image {
     #xSpeed = 0
     #ySpeed = 0
     
-    constructor(bulletDefinition:BulletInterface) {
+    constructor(params:BulletParams) {
         // https://phaser.io/examples/v3/view/games/top-down-shooter/topdowncombatmechanics
-        super(bulletDefinition.scene, bulletDefinition.x, bulletDefinition.y, 'img-bullet')
-        bulletDefinition.scene.add.existing(this)
-        bulletDefinition.scene.physics.add.existing(this) // may need to remove this in favor of grouped physics for collision
+        super(params.scene, params.x, params.y, 'img-bullet')
+        params.scene.add.existing(this)
+        params.scene.physics.add.existing(this) // may need to remove this in favor of grouped physics for collision
 
-        this.calcDirection(bulletDefinition)
-        this.calcSpeedForXY(bulletDefinition)
-        this.calcRotation(bulletDefinition)
+        this.calcDirection(params)
+        this.calcSpeedForXY(params)
+        this.calcRotation(params)
     }
 
-    private calcDirection(bulletDefinition:BulletInterface) {
-        this.#direction = Math.atan((bulletDefinition.target.x - this.x) / (bulletDefinition.target.y - this.y))
+    private calcDirection(params:BulletParams) {
+        this.#direction = Math.atan((params.target.x - this.x) / (params.target.y - this.y))
     }
 
-    private calcSpeedForXY(bulletDefinition:BulletInterface) {
+    private calcSpeedForXY(params:BulletParams) {
         // Calculate X and y velocity of bullet to moves it from shooter to target
-        if (bulletDefinition.target.y >= this.y) {
+        if (params.target.y >= this.y) {
             this.#xSpeed = this.#speed * Math.sin(this.#direction)
             this.#ySpeed = this.#speed * Math.cos(this.#direction)
         } else {
@@ -43,9 +43,9 @@ export default class Bullet extends Phaser.GameObjects.Image {
         }
     }
 
-    private calcRotation(bulletDefinition:BulletInterface) {
+    private calcRotation(params:BulletParams) {
         // Angle bullet with shooters rotation
-        this.rotation = bulletDefinition.shooter.rotation
+        this.rotation = params.shooter.rotation
     }
 
     preUpdate(time:number, delta:number):void {

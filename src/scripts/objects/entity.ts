@@ -2,7 +2,7 @@ import 'phaser'
 import Bullet from './bullet'
 import WorldScene from '../scenes/worldScene'
 
-export interface EntityInterface {
+export interface EntityParams {
     worldSceneRef: WorldScene,
     x: number,
     y: number,
@@ -12,7 +12,7 @@ export interface EntityInterface {
     isPlayer: boolean
 }
 
-export interface ShootInterface {
+export interface ShootParams {
     target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, 
     shooter?:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, 
     shooterX?:number, 
@@ -28,14 +28,14 @@ export default class Entity extends Phaser.GameObjects.Container {
     worldSceneRef:WorldScene
     isPlayer:boolean = false
 
-    constructor(entityDefinition:EntityInterface) {
-        super(entityDefinition.worldSceneRef, entityDefinition.x, entityDefinition.y)
+    constructor(params:EntityParams) {
+        super(params.worldSceneRef, params.x, params.y)
         
-        for (const key of Object.keys(entityDefinition)) {
-            this[key] = entityDefinition[key]
+        for (const key of Object.keys(params)) {
+            this[key] = params[key]
         }
 
-        entityDefinition.worldSceneRef.add.existing(this)
+        params.worldSceneRef.add.existing(this)
 
     }
 
@@ -90,16 +90,16 @@ export default class Entity extends Phaser.GameObjects.Container {
         return this.canShoot && this.isAlive()
     }
 
-    public shoot(shootDefinition:ShootInterface) {
+    public shoot(params:ShootParams) {
         if (!this.getCanShoot())
             return
         
         new Bullet({
             scene: this.worldSceneRef,
-            target: shootDefinition.target,
-            shooter: shootDefinition.shooter ?? this,
-            x: shootDefinition.shooterX ?? shootDefinition?.shooter?.x ?? this.x,
-            y: shootDefinition.shooterY ?? shootDefinition?.shooter?.y ?? this.y,
+            target: params.target,
+            shooter: params.shooter ?? this,
+            x: params.shooterX ?? params?.shooter?.x ?? this.x,
+            y: params.shooterY ?? params?.shooter?.y ?? this.y,
         })
         
         if (this.isPlayer) {
