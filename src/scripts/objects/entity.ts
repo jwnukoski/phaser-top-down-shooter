@@ -1,5 +1,5 @@
 import 'phaser'
-import Bullet from './bullet'
+import { Bullet, BulletInterface } from './bullet'
 import WorldScene from '../scenes/worldScene'
 
 // Base class for anything 'alive' in the game
@@ -76,11 +76,14 @@ export default class Entity extends Phaser.GameObjects.Container {
         if (!this.getCanShoot())
             return
         
-        new Bullet(this.#worldSceneRef,
-                    shooterX, shooterY, 
-                    shooter, 
-                    target)
-
+        new Bullet({
+            scene: this.#worldSceneRef,
+            x: shooterX,
+            y: shooterY,
+            shooter: shooter,
+            target: target
+        })
+        
         if (this.#isPlayer) {
             // Player physics collider with rest of enemies layer and hitcallback
             // this.#worldSceneRef.physics.add.collider(this.#worldSceneRef.getEnemyBulletsPhysicsGroup(), bullet, enemyHitCallback);

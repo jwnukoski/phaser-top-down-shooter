@@ -2,31 +2,50 @@ import 'phaser'
 import WorldScene from '../scenes/worldScene'
 import Entity from './entity'
 
-export default class Bullet extends Phaser.GameObjects.Image {
+export interface BulletInterface {
+    scene:WorldScene, 
+    x:number, 
+    y:number, 
+    shooter:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, 
+    target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite
+}
+
+export class Bullet extends Phaser.GameObjects.Image {
     #speed = 1
     #born = 0
     #direction = 0
     #xSpeed = 0
     #ySpeed = 0
     
-    constructor(scene:WorldScene, x:number, y:number, shooter:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite) {
+    constructor(bulletDefinition:BulletInterface) {
         // https://phaser.io/examples/v3/view/games/top-down-shooter/topdowncombatmechanics
-        super(scene, x, y, 'img-bullet')
-        scene.add.existing(this)
-        scene.physics.add.existing(this) // may need to remove this in favor of grouped physics for collision
+        super(bulletDefinition.scene, bulletDefinition.x, bulletDefinition.y, 'img-bullet')
+        bulletDefinition.scene.add.existing(this)
+        bulletDefinition.scene.physics.add.existing(this) // may need to remove this in favor of grouped physics for collision
 
-        this.#direction = Math.atan((target.x - this.x) / (target.y - this.y))
+        this.calcDirection(bulletDefinition)
+        this.calcSpeedForXY(bulletDefinition)
+        this.calcRotation(bulletDefinition)
+    }
 
+    private calcDirection(bulletDefinition:BulletInterface) {
+        this.#direction = Math.atan((bulletDefinition.target.x - this.x) / (bulletDefinition.target.y - this.y))
+    }
+
+    private calcSpeedForXY(bulletDefinition:BulletInterface) {
         // Calculate X and y velocity of bullet to moves it from shooter to target
-        if (target.y >= this.y) {
-            this.#xSpeed = this.#speed * Math.sin(this.#direction);
-            this.#ySpeed = this.#speed * Math.cos(this.#direction);
+        if (bulletDefinition.target.y >= this.y) {
+            this.#xSpeed = this.#speed * Math.sin(this.#direction)
+            this.#ySpeed = this.#speed * Math.cos(this.#direction)
         } else {
-            this.#xSpeed = -this.#speed * Math.sin(this.#direction);
-            this.#ySpeed = -this.#speed * Math.cos(this.#direction);
+            this.#xSpeed = -this.#speed * Math.sin(this.#direction)
+            this.#ySpeed = -this.#speed * Math.cos(this.#direction)
         }
+    }
 
-        this.rotation = shooter.rotation; // angle bullet with shooters rotation
+    private calcRotation(bulletDefinition:BulletInterface) {
+        // Angle bullet with shooters rotation
+        this.rotation = bulletDefinition.shooter.rotation
     }
 
     preUpdate(time:number, delta:number):void {

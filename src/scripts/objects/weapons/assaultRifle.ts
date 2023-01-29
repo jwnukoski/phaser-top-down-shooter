@@ -1,7 +1,7 @@
 import 'phaser'
-import { Weapon, BaseWeapon } from './baseWeapon'
+import { Weapon, WeaponInterface } from './weapon'
 
-export default class AssaultRifle extends BaseWeapon {
+export default class AssaultRifle extends Weapon {
     constructor() {
         super({
             name: 'Assault Rifle',
@@ -9,7 +9,8 @@ export default class AssaultRifle extends BaseWeapon {
             magazineSize: 30,
             rounds: 30,
             magazineRounds: 30,
-            isMelee: false
+            isMelee: false,
+            attackSound: 'snd-',
         })
     }
 }

@@ -1,21 +1,23 @@
-export interface Weapon {
+export interface WeaponInterface {
     name:string,            // friendly name of weapon
     fireRate:number,        // time between a attack/round
     magazineSize:number,    // max rounds that can fit in a magazine
     rounds:number,          // starting rounds out of magazine
     magazineRounds:number,  // starting rounds in magazine
     isMelee:boolean,        // infinite ammo
+    attackSound:string,     // sound key
 }
 
-export class BaseWeapon implements Weapon {
+export class Weapon implements WeaponInterface {
     name:string = '???'
     fireRate:number = 1
     magazineSize: number = 0
     rounds:number = 0
     magazineRounds:number = 0
     isMelee:boolean = false
+    attackSound:string = ''
 
-    constructor(startingWeaponParameters:Weapon) {
+    constructor(startingWeaponParameters:WeaponInterface) {
         for (const key of Object.keys(startingWeaponParameters)) {
             this[key] = startingWeaponParameters[key]
         }
