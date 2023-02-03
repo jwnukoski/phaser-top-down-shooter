@@ -33,8 +33,6 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   public getPlayer():Player {
-    console.log('GET PLAYER:')
-    console.log(this.#player)
     return this.#player
   }
 
