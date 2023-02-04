@@ -28,7 +28,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       )
 
       this.anims.create(
-        this.genAnimConf('idle-handgun', 30, 30, 0)
+        this.genAnimConf('idle-pistol', 30, 30, 0)
       )
 
       this.anims.create(
@@ -44,7 +44,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       )
 
       this.anims.create(
-        this.genAnimConf('walk-handgun', 30, 37, -1)
+        this.genAnimConf('walk-pistol', 30, 37, -1)
       )
 
       this.anims.create(
@@ -60,7 +60,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       )
 
       this.anims.create(
-        this.genAnimConf('run-handgun', 70, 75, -1)
+        this.genAnimConf('run-pistol', 70, 75, -1)
       )
 
       this.anims.create(
@@ -72,7 +72,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
       )
 
       // test
-      this.play('run-handgun');
+      this.play('run-pistol');
     }
 
     private genAnimConf(key:string, startFrame:number, endFrame:number, repeat:number, frameRate = 8):Phaser.Types.Animations.Animation {
@@ -107,10 +107,10 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     private stepFrameSounds(animKey:string, animFrame:number) {
       let playWalk:boolean = false
 
-      if (animKey === 'walk-unarmed' || animKey === 'walk-punch' || animKey === 'walk-handgun' || animKey === 'walk-rifle')
+      if (animKey === 'walk-unarmed' || animKey === 'walk-punch' || animKey === 'walk-pistol' || animKey === 'walk-rifle')
         playWalk = (animFrame === 3 || animFrame === 7)
 
-      if (animKey === 'run-unarmed' || animKey === 'run-punch' || animKey === 'run-handgun')
+      if (animKey === 'run-unarmed' || animKey === 'run-punch' || animKey === 'run-pistol')
         playWalk = (animFrame === 2 || animFrame === 5)
 
       if (animKey === 'run-rifle')

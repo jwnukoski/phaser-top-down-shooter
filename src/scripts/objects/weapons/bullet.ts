@@ -1,6 +1,6 @@
 import 'phaser'
-import WorldScene from '../scenes/worldScene'
-import Entity from './entity'
+import WorldScene from '../../scenes/worldScene'
+import Entity from '../entity'
 
 export interface BulletParams {
     scene:WorldScene, 

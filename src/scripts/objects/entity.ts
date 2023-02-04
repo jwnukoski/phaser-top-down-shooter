@@ -1,5 +1,4 @@
 import 'phaser'
-import Bullet from './bullet'
 import WorldScene from '../scenes/worldScene'
 
 export interface EntityParams {
@@ -10,13 +9,6 @@ export interface EntityParams {
     maxHealth: number,
     bleeds: boolean,
     isPlayer: boolean
-}
-
-export interface ShootParams {
-    target:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, 
-    shooter?:Entity | Phaser.GameObjects.Container | Phaser.GameObjects.Sprite, 
-    shooterX?:number, 
-    shooterY?:number,
 }
 
 export default class Entity extends Phaser.GameObjects.Container implements EntityParams {
@@ -38,14 +30,12 @@ export default class Entity extends Phaser.GameObjects.Container implements Enti
 
     }
 
-    public damage(amount:number, bullet:Bullet, bleedX:number = this.x, bleedY:number = this.y):number {
+    public damage(amount:number, bleedX:number = this.x, bleedY:number = this.y):number {
         this.health -= amount
         this.bleed(bleedX, bleedY)
         
         if (this.health < 0)
             this.health = 0
-        
-        bullet.destroy()
 
         return this.health
     }
@@ -78,44 +68,6 @@ export default class Entity extends Phaser.GameObjects.Container implements Enti
             return true
 
         return false
-    }
-
-    public setCanShoot(canShoot:boolean = false):boolean {
-        this.canShoot = canShoot
-        return this.canShoot
-    }
-
-    public getCanShoot():boolean {
-        return this.canShoot && this.isAlive()
-    }
-
-    public shoot(params:ShootParams) {
-        if (!this.getCanShoot())
-            return
-
-
-        // test
-        this.worldSceneRef.sound.add('snd-weapons-pistol-attack', {
-            loop: false,
-            volume: 0.5,
-        }).play()
-        
-        new Bullet({
-            scene: this.worldSceneRef,
-            target: params.target,
-            shooter: params.shooter ?? this,
-            x: params.shooterX ?? params?.shooter?.x ?? this.x,
-            y: params.shooterY ?? params?.shooter?.y ?? this.y,
-        })
-        
-        if (this.isPlayer) {
-            // Player physics collider with rest of enemies layer and hitcallback
-            // this.#worldSceneRef.physics.add.collider(this.#worldSceneRef.getEnemyBulletsPhysicsGroup(), bullet, enemyHitCallback);
-        }
-
-        if (!this.isPlayer) {
-            // Enemy physics collider with player and hitcallback
-        }
     }
 }
   

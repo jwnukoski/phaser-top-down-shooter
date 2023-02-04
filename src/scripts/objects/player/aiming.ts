@@ -25,18 +25,6 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     setMouseBehavior() {
-        // Locks pointer on mousedown
-        this.scene.game.canvas.addEventListener('mousedown', () => {
-            this.scene.input.mouse.requestPointerLock();
-            
-            // test
-            this.#playerRef.setCanShoot(true)
-            this.#playerRef.shoot({
-                target: this.#crosshairsSprite,
-                shooter: this.#playerAnimations
-            })
-        });
-
         // Exit pointer lock when Q or escape (by default) is pressed.
         this.scene.input.keyboard.on('keydown_Q', () => {
             if (this.scene.game.input.mouse.locked)

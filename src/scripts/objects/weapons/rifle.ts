@@ -1,10 +1,12 @@
 import 'phaser'
+import WorldScene from '../../scenes/worldScene'
 import { Weapon } from './weapon'
 
 export default class Rifle extends Weapon {
-    constructor() {
+    constructor(scene:WorldScene) {
         super({
             name: 'rifle',
+            scene: scene,
             worldImg: 'img-weapons-rifle',
             fireRate: 0.1,
             magazineSize: 30,
