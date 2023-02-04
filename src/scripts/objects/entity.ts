@@ -92,6 +92,13 @@ export default class Entity extends Phaser.GameObjects.Container implements Enti
     public shoot(params:ShootParams) {
         if (!this.getCanShoot())
             return
+
+
+        // test
+        this.worldSceneRef.sound.add('snd-weapons-pistol-attack', {
+            loop: false,
+            volume: 0.5,
+        }).play()
         
         new Bullet({
             scene: this.worldSceneRef,

@@ -2,7 +2,6 @@
 /* This template makes it difficult for webpack to use native 'fs' */
 export default [
     /* Music */
-    'music/dnb',
     'music/atmospheric',
     /* Common */
     'common/bodydrop1',
@@ -11,5 +10,11 @@ export default [
     'common/step1',
     'common/step2',
     'common/step3',
-    'common/step4'
+    'common/step4',
+    /* Weapons */
+    'weapons/grenade/explode',
+    'weapons/pistol/attack',
+    'weapons/pistol/reload',
+    'weapons/rifle/attack',
+    'weapons/rifle/reload',
 ]

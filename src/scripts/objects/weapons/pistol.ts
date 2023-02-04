@@ -11,8 +11,8 @@ export default class Pistol extends Weapon {
             rounds: 30,
             magazineRounds: 30,
             isMelee: false,
-            attackSound: 'snd-',
-            reloadSound: 'snd-',
+            attackSound: 'snd-weapons-pistol-attack',
+            reloadSound: 'snd-weapons-pistol-reload',
         })
     }
 }

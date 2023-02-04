@@ -11,13 +11,18 @@ export default class SoundLoader {
     
     preload() {   
         for (const soundPath of soundList) {
-            const path = `assets/snd/${soundPath}.mp3`
-            const key = path.replaceAll('assets/', '')
-                            .replaceAll('/', '-')
-                            .replaceAll('_', '-')
-                            .replaceAll('.mp3', '')
-                            .toLowerCase()
-            this.#sceneRef.load.audio(key, path)
+            try {
+                const path = `assets/snd/${soundPath}.mp3`
+                const key = path.replaceAll('assets/', '')
+                                .replaceAll('/', '-')
+                                .replaceAll('_', '-')
+                                .replaceAll('.mp3', '')
+                                .toLowerCase()
+                console.log(key)      
+                this.#sceneRef.load.audio(key, path)
+            } catch (e) {
+                console.error(e)
+            }
         }
     }
 }

@@ -13,16 +13,18 @@ export default class ImageLoader {
     
     preload() {   
         for (const imagePath of imageList) {
-            const path = `assets/img/${imagePath}.png`
-            const key = path.replaceAll('assets/', '')
-                            .replaceAll('/', '-')
-                            .replaceAll('_', '-')
-                            .replaceAll('.png', '')
-                            .toLowerCase()
-
-            console.log(key)
-
-            this.loadAsImageOrSprite(imagePath, path, key)
+            try {
+                const path = `assets/img/${imagePath}.png`
+                const key = path.replaceAll('assets/', '')
+                                .replaceAll('/', '-')
+                                .replaceAll('_', '-')
+                                .replaceAll('.png', '')
+                                .toLowerCase()
+                console.log(key)
+                this.loadAsImageOrSprite(imagePath, path, key)
+            } catch (e) {
+                console.error(e)
+            }
         }
     }
 
