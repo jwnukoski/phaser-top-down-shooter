@@ -8,6 +8,8 @@ export default [
     'items',
     'tiles',
     'bullet',
+    'weapons/handgun',
+    'weapons/rifle',
 
     /* Player */
     'player/crosshairs',

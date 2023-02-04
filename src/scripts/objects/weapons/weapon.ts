@@ -5,7 +5,9 @@ export interface WeaponParams {
     rounds:number,          // starting rounds out of magazine
     magazineRounds:number,  // starting rounds in magazine
     isMelee:boolean,        // infinite ammo
-    attackSound:string,     // sound key
+    attackSound:string,     // sound key for attack
+    reloadSound:string,     // sound key for reload
+    worldImg:string         // image key for world model
 }
 
 export class Weapon implements WeaponParams {
@@ -16,6 +18,8 @@ export class Weapon implements WeaponParams {
     magazineRounds:number = 0
     isMelee:boolean = false
     attackSound:string = ''
+    worldImg:string = ''
+    reloadSound:string = ''
 
     constructor(params:WeaponParams) {
         for (const key of Object.keys(params)) {
