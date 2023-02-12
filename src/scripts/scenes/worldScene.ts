@@ -2,7 +2,7 @@ import Player from '../objects/player/player'
 import ImageLoader from '../helpers/img/imageLoader'
 import SoundLoader from '../helpers/snd/soundLoader'
 import Music from '../objects/music'
-import Bullet from '../objects/bullet'
+import Bullet from '../objects/weapons/bullet'
 import Entity from '../objects/entity'
 
 export default class WorldScene extends Phaser.Scene {

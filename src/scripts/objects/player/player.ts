@@ -5,12 +5,14 @@ import Animations from './animations'
 import Weapons from './weapons'
 import Entity from '../entity'
 import WorldScene from '../../scenes/worldScene'
+import Hud from './hud/hud'
 
 export default class Player extends Entity {
     #aiming:Aiming
     #movement:Movement
     #animations:any
     #weapons:Weapons
+    #hud:Hud
 
     constructor(scene:WorldScene, x:number, y:number) {
       super({
@@ -27,6 +29,7 @@ export default class Player extends Entity {
       this.#aiming = new Aiming(this.#animations, scene, this)
       this.#movement = new Movement(this, this.#animations)
       this.#weapons = new Weapons(this)
+      this.#hud = new Hud(scene, this)
     }
 
     public getCrosshairsSprite() {
