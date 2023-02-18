@@ -1,23 +1,23 @@
 import 'phaser'
 import WorldScene from '../../../scenes/worldScene'
 import Player from '../player'
+import Hud from './hud'
 
-export default class Health extends Phaser.GameObjects.Container {
+export default class Health extends Phaser.GameObjects.Text {
     #playerRef:Player
-    #text:Phaser.GameObjects.Text
 
-    constructor(scene:WorldScene, player:Player) {
-        super(scene, 0, 0)
-        this.#playerRef = player
-        this.scene.add.existing(this)
-
-        this.#text = scene.add.text(0, 0, '0', { 
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif' 
+    constructor(player:Player, scene:WorldScene) {
+        super(scene, 0, 280, '0', {
+            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            stroke: '#000000',
+            strokeThickness: 2,
         })
+
+        this.#playerRef = player
     }
 
     preUpdate():void {
-        this.#text.setText(`${this.#playerRef.getHealth()}%`)
+        this.setText(`${this.#playerRef.getHealth()}%`)
     }
 }
   

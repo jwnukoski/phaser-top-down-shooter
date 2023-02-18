@@ -36,6 +36,13 @@ export default class Player extends Entity {
       return this.#aiming.getCrosshairsSprite()
     }
 
+    public getPosition():any {
+      return {
+        x: this.#animations.x,
+        y: this.#animations.y
+      }
+    }
+
     preUpdate():void {
       this.#aiming.preUpdate()
       this.#movement.preUpdate() 
