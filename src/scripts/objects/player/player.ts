@@ -6,12 +6,14 @@ import Weapons from './weapons'
 import Entity from '../entity'
 import WorldScene from '../../scenes/worldScene'
 import Hud from './hud/hud'
+import { Messages, Message } from './messages'
 
 export default class Player extends Entity {
     #aiming:Aiming
     #movement:Movement
     #animations:any
     #weapons:Weapons
+    messages:Messages
     #hud:Hud
 
     constructor(scene:WorldScene, x:number, y:number) {
@@ -30,10 +32,20 @@ export default class Player extends Entity {
       this.#movement = new Movement(this, this.#animations)
       this.#weapons = new Weapons(this)
       this.#hud = new Hud(scene, this)
+      this.messages = new Messages()
+
+      this.messages.addMessage({
+        message: 'Objective: Eliminate all enemies',
+        color: 'yellow'
+      })
     }
 
-    public getCrosshairsSprite() {
+    public getCrosshairsSprite():Phaser.GameObjects.Sprite {
       return this.#aiming.getCrosshairsSprite()
+    }
+
+    public getAmmoInfo():string {
+      return this.#weapons.getAmmoInfo()
     }
 
     public getPosition():any {

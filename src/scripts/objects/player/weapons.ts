@@ -9,6 +9,10 @@ export default class Weapons {
         // });
     }
 
+    public getAmmoInfo():string {
+        return `0/0`
+    }
+
     public getCurrentWeapon():string {
         return this.#weaponState // temp
     }

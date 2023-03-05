@@ -1,7 +1,6 @@
 import 'phaser'
 import WorldScene from '../../../scenes/worldScene'
 import Player from '../player'
-import Hud from './hud'
 
 export default class Health extends Phaser.GameObjects.Text {
     #playerRef:Player
