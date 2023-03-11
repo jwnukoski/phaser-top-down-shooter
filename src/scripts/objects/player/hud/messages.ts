@@ -41,22 +41,25 @@ export default class Messages extends Phaser.GameObjects.Text {
         }
     }
 
-    private getMessage():void {
+    private getMessage():boolean {
         this.#message = this.#playerRef.messages.pullMessage()
         
         if (this.#message === undefined)
-            return
+            return false
 
-
-        this.scene.sound.add('snd-common-message', {
-            loop: false,
-            volume: 0.5,
-        }).play()
-        
         this.setMessageColor(this.#message)
         this.setText(this.#message.message)
         this.#messageMaxCount = this.setMaxMessageCount(this.#message)
         this.#showingMessage = true
+
+        return true
+    }
+
+    private playMessageSound():void {
+        this.scene.sound.add('snd-common-message', {
+            loop: false,
+            volume: 0.5,
+        }).play()
     }
 
     private resetMessage() {
@@ -71,7 +74,7 @@ export default class Messages extends Phaser.GameObjects.Text {
         } else if (this.#showingMessage && (this.#messageShowCount >= this.#messageMaxCount)) {
             this.resetMessage()
         } else if (!this.#showingMessage) {
-            this.getMessage()
+            this.getMessage() ? this.playMessageSound() : null
         }
     }
 }
