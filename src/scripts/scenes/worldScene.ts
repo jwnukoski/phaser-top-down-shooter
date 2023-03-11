@@ -23,6 +23,9 @@ export default class WorldScene extends Phaser.Scene {
     const mapData = this.add.tilemap('testMapJson');
     mapData.addTilesetImage('1', 'img-tiles')
     mapData.createLayer('1', '1')
+
+    mapData.addTilesetImage('2', 'img-items')
+    mapData.createLayer('2', '2')
     
     this.#player = new Player(this, 150, 150)
     this.#music.startTrack('snd-music-atmospheric') // test
