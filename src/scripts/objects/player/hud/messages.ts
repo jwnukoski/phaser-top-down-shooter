@@ -47,6 +47,12 @@ export default class Messages extends Phaser.GameObjects.Text {
         if (this.#message === undefined)
             return
 
+
+        this.scene.sound.add('snd-common-message', {
+            loop: false,
+            volume: 0.5,
+        }).play()
+        
         this.setMessageColor(this.#message)
         this.setText(this.#message.message)
         this.#messageMaxCount = this.setMaxMessageCount(this.#message)

@@ -11,6 +11,7 @@ export default [
     'common/step2',
     'common/step3',
     'common/step4',
+    'common/message',
     /* Weapons */
     'weapons/grenade/explode',
     'weapons/pistol/attack',
