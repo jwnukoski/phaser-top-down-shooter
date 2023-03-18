@@ -3,12 +3,13 @@ import WorldScene from '../scenes/worldScene'
 
 export interface EntityParams {
     worldSceneRef: WorldScene,
+    worldCollision: Phaser.Tilemaps.TilemapLayer,
     x: number,
     y: number,
     health: number,
     maxHealth: number,
     bleeds: boolean,
-    isPlayer: boolean
+    isPlayer: boolean,
 }
 
 export default class Entity extends Phaser.GameObjects.Container implements EntityParams {
@@ -18,6 +19,7 @@ export default class Entity extends Phaser.GameObjects.Container implements Enti
     canShoot:boolean = false
     worldSceneRef:WorldScene
     isPlayer:boolean = false
+    worldCollision:Phaser.Tilemaps.TilemapLayer
 
     constructor(params:EntityParams) {
         super(params.worldSceneRef, params.x, params.y)

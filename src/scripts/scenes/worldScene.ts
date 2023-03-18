@@ -10,6 +10,7 @@ export default class WorldScene extends Phaser.Scene {
   #soundLoader:SoundLoader = new SoundLoader(this)
   #music:Music = new Music(this)
   #player: Player
+  #collisionLayer: Phaser.Tilemaps.TilemapLayer
 
   #playerBullets:Phaser.Physics.Arcade.Group
   #enemyBullets:Phaser.Physics.Arcade.Group
@@ -22,17 +23,30 @@ export default class WorldScene extends Phaser.Scene {
   create() {
     const mapData = this.add.tilemap('testMapJson');
     mapData.addTilesetImage('1', 'img-tiles')
-    mapData.createLayer('1', '1')
+    mapData.createLayer('1', '1').setCollision(0)
 
     mapData.addTilesetImage('2', 'img-items')
     mapData.createLayer('2', '2')
-    
-    this.#player = new Player(this, 150, 150)
+
+    mapData.addTilesetImage('3', 'img-tiles')
+    this.#collisionLayer = mapData.createLayer('3', '3').setCollision(-1)
+
+    this.#collisionLayer.setData({
+      collides: true
+    })
+
+    this.#player = new Player(this, this.#collisionLayer, 150, 150)
     this.#music.startTrack('snd-music-atmospheric') // test
+    
+
+    // wall collision
+    // this.physics.add.collider(this.#player.getPhysicsBody(), this.#collisionLayer)
+    
 
     this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
     this.#enemies = this.physics.add.group()
     this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
+    
   }
 
   public getPlayer():Player {

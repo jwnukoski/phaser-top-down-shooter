@@ -16,9 +16,10 @@ export default class Player extends Entity {
     messages:Messages
     #hud:Hud
 
-    constructor(scene:WorldScene, x:number, y:number) {
+    constructor(scene:WorldScene, collisionLayer:Phaser.Tilemaps.TilemapLayer, x:number, y:number) {
       super({
         worldSceneRef: scene,
+        worldCollision: collisionLayer,
         x: 0,
         y: 0,
         health: 100,
@@ -38,6 +39,10 @@ export default class Player extends Entity {
         message: 'Objective: Eliminate all enemies',
         color: 'yellow'
       })
+    }
+
+    public getPhysicsBody(): Phaser.GameObjects.GameObject {
+      return this.#animations.body
     }
 
     public getCrosshairsSprite():Phaser.GameObjects.Sprite {

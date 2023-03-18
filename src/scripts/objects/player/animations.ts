@@ -1,20 +1,29 @@
 import 'phaser'
+import Player from './player'
 
 export default class Animations extends Phaser.GameObjects.Sprite {
     #spritesheetKey:string
-    #playerContainerRef:Phaser.GameObjects.Container
+    #playerContainerRef:Player
 
     #stepVariant:number = 1
     #lastStepFrame:number = -1
 
-    constructor(scene:Phaser.Scene, x:number, y:number, playerContainer:Phaser.GameObjects.Container, spritesheetKey:string = 'img-player-ss-48-48-player') {
+    constructor(scene:Phaser.Scene, x:number, y:number, playerContainer:Player, spritesheetKey:string = 'img-player-ss-48-48-player') {
         super(scene, x, y, spritesheetKey)
         scene.add.existing(this)
         this.#spritesheetKey = spritesheetKey
         this.#playerContainerRef = playerContainer
+        playerContainer.add(this)
 
         scene.physics.add.existing(this)
-        this.#playerContainerRef.add(this)
+        // this.#playerContainerRef.worldCollision.setCollisionBetween(0, 2, true, true,)
+        scene.physics.add.collider(this.#playerContainerRef.worldCollision, this, (obj1: Phaser.Types.Physics.Arcade.GameObjectWithBody, obj2: Phaser.Types.Physics.Arcade.GameObjectWithBody) => {
+          console.log(obj1)
+          console.log(obj2)
+        })
+        
+
+        
         this.setupAnimations()
     }
 
@@ -90,6 +99,8 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     public pickAnimation(state:string):void {
       this.playAnimIfNotAlready(state)
       this.playFrameSounds()
+
+      return 
     }
 
     private playAnimIfNotAlready(key:string) {

@@ -7,7 +7,7 @@
             21, 21, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,
             21, 21, 33, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 33,
             21, 21, 33, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 33,
-            21, 21, 33, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 33,
+            21, 21, 33, 13, 13, 13, 13, 13, 501, 13, 13, 13, 13, 13, 33,
             21, 21, 33, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 33,
             21, 21, 33, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 33,
             21, 21, 33, 13, 13, 13, 13, 33, 21, 21, 33, 13, 13, 13, 33,
@@ -53,8 +53,40 @@
          "width":15,
          "x":0,
          "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 501, 501, 501, 501, 501, 501, 501, 501, 501, 501, 501, 501, 501,
+            0, 0, 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 501,
+            0, 0, 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 501,
+            0, 0, 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 501,
+            0, 0, 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 501,
+            0, 0, 501, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 501,
+            0, 0, 501, 0, 0, 0, 0, 501, 0, 0, 501, 0, 0, 0, 501,
+            0, 0, 501, 501, 501, 501, 501, 501, 0, 0, 501, 501, 501, 501, 501,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":15,
+         "id":5,
+         "name":"3",
+         "opacity":0.5,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":15,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
+ "nextlayerid":6,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -72,6 +104,61 @@
          "spacing":0,
          "tilecount":400,
          "tileheight":48,
+         "tiles":[
+                {
+                 "id":0,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "class":"",
+                             "height":48,
+                             "id":7,
+                             "name":"",
+                             "rotation":0,
+                             "visible":true,
+                             "width":48,
+                             "x":0,
+                             "y":0
+                            }, 
+                            {
+                             "class":"",
+                             "height":0,
+                             "id":8,
+                             "name":"",
+                             "rotation":0,
+                             "visible":true,
+                             "width":0,
+                             "x":0,
+                             "y":0
+                            }, 
+                            {
+                             "class":"",
+                             "height":48,
+                             "id":9,
+                             "name":"",
+                             "rotation":0,
+                             "visible":true,
+                             "width":48,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":48,
          "transparentcolor":"#ff00ff"
         }, 
@@ -86,6 +173,70 @@
          "spacing":0,
          "tilecount":100,
          "tileheight":48,
+         "tilewidth":48,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":20,
+         "firstgid":501,
+         "image":"..\/img\/tiles.png",
+         "imageheight":960,
+         "imagewidth":960,
+         "margin":0,
+         "name":"3",
+         "spacing":0,
+         "tilecount":400,
+         "tileheight":48,
+         "tiles":[
+                {
+                 "id":0,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "class":"",
+                             "height":48,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "visible":true,
+                             "width":48,
+                             "x":0,
+                             "y":0
+                            }, 
+                            {
+                             "class":"",
+                             "height":48,
+                             "id":5,
+                             "name":"",
+                             "properties":[
+                                    {
+                                     "name":"collides",
+                                     "type":"bool",
+                                     "value":true
+                                    }],
+                             "rotation":0,
+                             "visible":true,
+                             "width":48,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":48,
          "transparentcolor":"#ff00ff"
         }],
