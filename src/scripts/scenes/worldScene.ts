@@ -23,13 +23,19 @@ export default class WorldScene extends Phaser.Scene {
   create() {
     const mapData = this.add.tilemap('testMapJson');
     mapData.addTilesetImage('1', 'img-tiles')
-    mapData.createLayer('1', '1').setCollision(0)
+    mapData.createLayer('1', '1')
 
-    mapData.addTilesetImage('2', 'img-items')
+    mapData.addTilesetImage('2', 'img-tiles')
     mapData.createLayer('2', '2')
 
+    mapData.addTilesetImage('items', 'img-items')
+    mapData.createLayer('items', 'items')
+
     mapData.addTilesetImage('3', 'img-tiles')
-    this.#collisionLayer = mapData.createLayer('3', '3').setCollision(-1)
+    mapData.createLayer('3', '3')
+
+    mapData.addTilesetImage('collision', 'img-tiles')
+    this.#collisionLayer = mapData.createLayer('collision', 'collision').setCollision(-1)
 
     this.#collisionLayer.setData({
       collides: true
