@@ -18,6 +18,11 @@ export default class Movement {
 
     private setupMoveKeys() {
         const scene = this.#playerRef.scene
+
+        if (!scene || !scene.input || !scene.input.keyboard) {
+            throw new Error('Invalid scene or keyboard')
+        }
+
         this.#moveKeys = {
             w: scene.input.keyboard.addKey('W'),
             a: scene.input.keyboard.addKey('A'),
@@ -26,6 +31,7 @@ export default class Movement {
             shift: scene.input.keyboard.addKey('SHIFT'),
         }
     }
+
 
     private verticalMovement():boolean {
         let isMoving:boolean = false

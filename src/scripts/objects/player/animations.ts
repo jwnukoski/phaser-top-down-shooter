@@ -17,12 +17,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
 
         scene.physics.add.existing(this)
         // this.#playerContainerRef.worldCollision.setCollisionBetween(0, 2, true, true,)
-        scene.physics.add.collider(this.#playerContainerRef.worldCollision, this, (obj1: Phaser.Types.Physics.Arcade.GameObjectWithBody, obj2: Phaser.Types.Physics.Arcade.GameObjectWithBody) => {
-          console.log(obj1)
-          console.log(obj2)
-        })
-        
-
+        scene.physics.add.collider(this.#playerContainerRef.worldCollision, this)
         
         this.setupAnimations()
     }
@@ -104,7 +99,7 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     }
 
     private playAnimIfNotAlready(key:string) {
-      if (this.anims.currentAnim.key !== key)
+      if (this.anims?.currentAnim?.key !== key)
         this.play(key)
     }
 
@@ -145,8 +140,8 @@ export default class Animations extends Phaser.GameObjects.Sprite {
     }
 
     private playFrameSounds() {
-      const animKey:string = this.anims.currentAnim.key ?? ''
-      const animFrame:number = this.anims.currentFrame.index ?? -1
+      const animKey:string = this.anims?.currentAnim?.key ?? ''
+      const animFrame:number = this.anims?.currentFrame?.index ?? -1
       this.stepFrameSounds(animKey, animFrame)
     }
 }

@@ -10,7 +10,7 @@ export default class WorldScene extends Phaser.Scene {
   #soundLoader:SoundLoader = new SoundLoader(this)
   #music:Music = new Music(this)
   #player: Player
-  #collisionLayer: Phaser.Tilemaps.TilemapLayer
+  #collisionLayer: Phaser.Tilemaps.TilemapLayer | undefined
 
   #playerBullets:Phaser.Physics.Arcade.Group
   #enemyBullets:Phaser.Physics.Arcade.Group
@@ -35,11 +35,15 @@ export default class WorldScene extends Phaser.Scene {
     mapData.createLayer('3', '3')
 
     mapData.addTilesetImage('collision', 'img-tiles')
-    this.#collisionLayer = mapData.createLayer('collision', 'collision').setCollision(-1)
+    this.#collisionLayer = mapData?.createLayer('collision', 'collision')?.setCollision(-1)
 
-    this.#collisionLayer.setData({
+    this.#collisionLayer?.setData({
       collides: true
     })
+
+    if (this.#collisionLayer === undefined) {
+      return
+    }
 
     this.#player = new Player(this, this.#collisionLayer, 150, 150)
     this.#music.startTrack('snd-music-atmospheric') // test

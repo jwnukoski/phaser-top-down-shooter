@@ -25,20 +25,24 @@ export default class Aiming extends Phaser.GameObjects.Container {
     }
 
     setMouseBehavior() {
+        if (!this.scene.game.canvas) {
+            return
+        }
+
         // Locks pointer on mousedown
         this.scene.game.canvas.addEventListener('mousedown', () => {
-            this.scene.input.mouse.requestPointerLock();
+            this.scene?.input?.mouse?.requestPointerLock();
         });
 
         // Exit pointer lock when Q or escape (by default) is pressed.
-        this.scene.input.keyboard.on('keydown_Q', () => {
-            if (this.scene.game.input.mouse.locked)
+        this.scene?.input?.keyboard?.on('keydown_Q', () => {
+            if (this.scene?.game?.input?.mouse?.locked)
                 this.scene.game.input.mouse.releasePointerLock();
         });
 
         // Move reticle upon locked pointer move
         this.scene.input.on('pointermove', (pointer) => {
-            if (this.scene.input.mouse.locked) {
+            if (this.scene?.input?.mouse?.locked) {
                 this.#crosshairsSprite.x += pointer.movementX;
                 this.#crosshairsSprite.y += pointer.movementY;
             }
@@ -98,8 +102,10 @@ export default class Aiming extends Phaser.GameObjects.Container {
         scene.cameras.main.startFollow(crosshairs)
 
         // Makes reticle move with player
-        crosshairs.body.velocity.x  = player.body.velocity.x
-        crosshairs.body.velocity.y = player.body.velocity.y
+        if (crosshairs.body && player.body) {
+            crosshairs.body.velocity.x  = player.body.velocity.x === null ? 0 : player.body.velocity.x
+            crosshairs.body.velocity.y = player.body.velocity.y === null ? 0 : player.body.velocity.y
+        }
 
         // Constrain position of reticle to radius around player
         this.constrainReticle(100)
