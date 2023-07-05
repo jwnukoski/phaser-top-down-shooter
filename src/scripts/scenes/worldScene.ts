@@ -35,28 +35,23 @@ export default class WorldScene extends Phaser.Scene {
     mapData.createLayer('3', '3')
 
     mapData.addTilesetImage('collision', 'img-tiles')
-    this.#collisionLayer = mapData?.createLayer('collision', 'collision')?.setCollision(-1)
+    this.#collisionLayer = mapData?.createLayer('collision', 'collision')?.setCollision(1)
 
-    this.#collisionLayer?.setData({
-      collides: true
-    })
+    // not needed since layer contains this property. may need later for something else.
+    // this.#collisionLayer?.setData({
+    //   collides: true
+    // })
 
     if (this.#collisionLayer === undefined) {
       return
     }
 
-    this.#player = new Player(this, this.#collisionLayer, 150, 150)
+    this.#player = new Player(this, this.#collisionLayer, 200, 200)
     this.#music.startTrack('snd-music-atmospheric') // test
-    
-
-    // wall collision
-    // this.physics.add.collider(this.#player.getPhysicsBody(), this.#collisionLayer)
-    
 
     this.#playerBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
     this.#enemies = this.physics.add.group()
     this.#enemyBullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true })
-    
   }
 
   public getPlayer():Player {

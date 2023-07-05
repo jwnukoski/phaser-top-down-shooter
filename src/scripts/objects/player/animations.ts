@@ -16,7 +16,6 @@ export default class Animations extends Phaser.GameObjects.Sprite {
         playerContainer.add(this)
 
         scene.physics.add.existing(this)
-        // this.#playerContainerRef.worldCollision.setCollisionBetween(0, 2, true, true,)
         scene.physics.add.collider(this.#playerContainerRef.worldCollision, this)
         
         this.setupAnimations()
