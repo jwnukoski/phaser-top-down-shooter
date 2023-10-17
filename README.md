@@ -11,6 +11,10 @@ However, a built Docker image is available for demo purposes.
 A prebuilt Docker Hub image is available [here](https://hub.docker.com/repository/docker/jwnukoski/phaser-top-down-shooter/general).  
 As noted above, this doesn't represent finished work.
 
+### Controls
+Strafe movement: W, A, S, D
+Aim and directional movement: Mouse
+
 ## Phaser
 ### Why I chose Phaser
 I figured this would be a fun experiment to try out using [Phaser.io](https://phaser.io/) framework on a complex idea such as this.  
@@ -27,4 +31,5 @@ However, there are performance implications when using JavaScript for games.
 - I'm not sure why collision and layering has to be so hard to implement with just rigid sprites, but I assume this is my own lack of research. However, I think a game engine/framework should be intuitive enough to not 'get in the way' so much with developement. I'm sure some people will disagree with me here.
 - I did not explore the [Phaser editor](https://phaser.io/shop/apps/phaser-editor).
 
-The future plan would be to try this project on a different engine/framework such as [Godot](https://godotengine.org/). 
+The future plan would be to try a project like this on a different engine/framework such as [Godot](https://godotengine.org/). 
+Perhaps I will revisit Phaser if I ever want to create a very simple web game not requiring a keyboard and mouse.
