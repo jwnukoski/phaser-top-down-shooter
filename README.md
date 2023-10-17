@@ -4,8 +4,8 @@ This was a project that I started to create a light top down shooter - taking in
 I have since stopped active development on this project for reasons [outlined below](#phaser).  
 However, a built [Docker image](#docker-image) is available for demo purposes.  
 
-## Screenshot
-![game screenshot](/screenshot.png)
+## Preview
+![game preview](/preview.png)
 
 ## Docker Image
 A prebuilt Docker Hub image is available [here](https://hub.docker.com/repository/docker/jwnukoski/phaser-top-down-shooter/general).  
