@@ -18,9 +18,9 @@ Being already familiar with JavaScript, and wanting a multi-platform game, I tho
 Also, there are no licensing fees (*cough*... [Unity](https://unity.com/)).
 
 ### Why I'm leaving Phaser
-The blow is simply opinions, and what didn't work for my workflow.  
+**The below are simply opinions, and what didn't work for my workflow.**  
 I think it's clear with games like the early version of [Vampire Survivors](https://en.wikipedia.org/wiki/Vampire_Survivors) that this can be a viable option for game development.  
-However, I think it should be noted that there are performance implications using JavaScript for games.
+However, there are performance implications when using JavaScript for games.
 
 - The docs are decent for the framework, but anything beyond surface level tutorials are simply not there yet.   
 - Using [Tiled](https://www.mapeditor.org/) is alright, but you're left with also parsing your own map data.
