@@ -2,9 +2,16 @@
 This was a project that I started to create a light top down shooter - taking inspiration from games like [Take No Prisoners](https://en.wikipedia.org/wiki/Take_No_Prisoners_(video_game)), [Hotline Miami](https://en.wikipedia.org/wiki/Hotline_Miami), and [Shadowrun](https://en.wikipedia.org/wiki/Shadowrun_(1993_video_game)).  
 
 I have since stopped active development on this projects for reasons outlined below.  
-However, a built Docker image is available for demo purposes.
+The future plan would be to try this project on a different engine/framework such as [Godot](https://godotengine.org/). 
+However, a built Docker image is available for demo purposes.  
 
+
+## Screenshot
 ![game screenshot](/screenshot.png)
+
+## Docker Image
+A prebuilt Docker Hub image is available [here](https://hub.docker.com/repository/docker/jwnukoski/phaser-top-down-shooter/general).  
+As noted above, this doesn't represent finished work.
 
 ## Phaser
 ### Why I chose Phaser
@@ -21,6 +28,3 @@ However, I think it should be noted that there are performance implications usin
 - Using [Tiled](https://www.mapeditor.org/) is alright, but you're left with also parsing your own map data.
 - I'm not sure why collision and layering has to be so hard to implement with just rigid sprites, but I assume this is my own lack of research. However, I think a game engine/framework should be intuitive enough to not 'get in the way' so much with developement. I'm sure some people will disagree with me here.
 - I did not explore the [Phaser editor](https://phaser.io/shop/apps/phaser-editor).
-
-## Future Plans
-I plan on exploring making this complex of a game in an engine such as [Godot](https://godotengine.org/). 
