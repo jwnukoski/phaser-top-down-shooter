@@ -4,7 +4,6 @@ This was a project that I started to create a light top down shooter - taking in
 I have since stopped active development on this project for reasons outlined below.  
 However, a built Docker image is available for demo purposes.  
 
-
 ## Screenshot
 ![game screenshot](/screenshot.png)
 
