@@ -1,0 +1,5 @@
+services:
+  game:
+    image: jwnukoski/phaser-top-down-shooter:latest
+    ports:
+      - "3001:3000"
