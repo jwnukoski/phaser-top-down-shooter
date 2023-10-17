@@ -1,4 +1,4 @@
-name: build-frontend
+name: build-game
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: ./
+          file: ./Dockerfile
           push: true
           tags: jwnukoski/phaser-top-down-shooter:latest
