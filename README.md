@@ -1,8 +1,8 @@
 # Phaser Top Down Shooter
 This was a project that I started to create a light top down shooter - taking inspiration from games like [Take No Prisoners](https://en.wikipedia.org/wiki/Take_No_Prisoners_(video_game)), [Hotline Miami](https://en.wikipedia.org/wiki/Hotline_Miami), and [Shadowrun](https://en.wikipedia.org/wiki/Shadowrun_(1993_video_game)).  
 
-I have since stopped active development on this project for reasons outlined below.  
-However, a built Docker image is available for demo purposes.  
+I have since stopped active development on this project for reasons [outlined below](#phaser).  
+However, a built [Docker image](#docker-image) is available for demo purposes.  
 
 ## Screenshot
 ![game screenshot](/screenshot.png)
@@ -12,9 +12,9 @@ A prebuilt Docker Hub image is available [here](https://hub.docker.com/repositor
 As noted above, this doesn't represent finished work.
 
 ### Controls
-Strafe movement: W, A, S, D
-Aim and directional movement: Mouse
-
+Strafe movement: W, A, S, D.  
+Aim and directional movement: Mouse.  
+  
 ## Phaser
 ### Why I chose Phaser
 I figured this would be a fun experiment to try out using [Phaser.io](https://phaser.io/) framework on a complex idea such as this.  
