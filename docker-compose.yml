@@ -3,3 +3,4 @@ services:
     image: jwnukoski/phaser-top-down-shooter:latest
     ports:
       - ${PORT}:3000
+    restart: always
