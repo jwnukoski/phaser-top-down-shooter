@@ -1,6 +1,6 @@
 {
   "short_name": "Phaser Game",
-  "name": "My Cool Phaser 3 Game",
+  "name": "Phaser Top Down Shooter",
   "icons": [
     {
       "src": "./icons/icons-192.png",
